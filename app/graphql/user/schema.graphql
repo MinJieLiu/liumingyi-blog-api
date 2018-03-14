@@ -1,0 +1,30 @@
+type User {
+  id: ID!
+  # 邮箱
+  email: String!
+  # 启用状态
+  enable: Boolean
+  # 激活状态
+  isActive: Boolean
+  # 昵称
+  nickname: String
+  # 头像
+  avatar: String
+  # 手机
+  mobile: String
+  # 介绍
+  introduction: String
+}
+
+input UserInput {
+  page: Int
+  size: Int
+  email: String
+  enable: Boolean
+  mobile: String
+}
+
+type UserResult {
+  count: Int!
+  rows: [User]!
+}

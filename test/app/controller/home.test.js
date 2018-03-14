@@ -1,10 +1,8 @@
-'use strict';
 
 const { app, assert } = require('egg-mock/bootstrap');
 
 describe('test/app/controller/home.test.js', () => {
-
-  it('should assert', function* () {
+  it('should assert', () => {
     const pkg = require('../../../package.json');
     assert(app.config.keys.startsWith(pkg.name));
 
@@ -12,10 +10,8 @@ describe('test/app/controller/home.test.js', () => {
     // yield ctx.service.xx();
   });
 
-  it('should GET /', () => {
-    return app.httpRequest()
-      .get('/')
-      .expect('hi, egg')
-      .expect(200);
-  });
+  it('should GET /', () => app.httpRequest()
+    .get('/')
+    .expect('hi, egg')
+    .expect(200));
 });

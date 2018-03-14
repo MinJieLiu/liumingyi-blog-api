@@ -1,13 +1,47 @@
-'use strict';
+module.exports = (appInfo) => {
+  const config = {
+    // App key
+    keys: appInfo.name,
+  };
 
-module.exports = appInfo => {
-  const config = exports = {};
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+    domainWhiteList: [
+      'http://localhost:3000',
+    ],
+  };
 
-  // use for cookie sign key, should change to your own and keep security
-  config.keys = appInfo.name + '_1521006655070_6006';
+  config.cors = {
+    credentials: true,
+  };
 
-  // add your config here
-  config.middleware = [];
+  config.middleware = [
+    'errorHandler',
+    'graphql',
+  ];
+
+  config.sequelize = {
+    dialect: 'mysql',
+    database: 'cutenav-blog',
+    host: 'localhost',
+    port: '3306',
+    username: 'root',
+    password: '123456',
+    timezone: '+08:00',
+    define: {
+      underscored: false, // 驼峰风格
+    },
+    paranoid: true, // 偏执模式
+    operatorsAliases: false,
+  };
+
+  // 分页
+  config.pages = {
+    defaultSize: 10,
+    defaultPage: 1,
+  };
 
   return config;
 };

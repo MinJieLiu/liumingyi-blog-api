@@ -4,8 +4,17 @@
   "description": "",
   "private": true,
   "dependencies": {
+    "dataloader": "^1.4.0",
     "egg": "^2.2.1",
-    "egg-scripts": "^2.5.0"
+    "egg-cors": "^2.0.0",
+    "egg-graphql": "^2.1.0",
+    "egg-scripts": "^2.5.0",
+    "egg-sequelize": "^3.1.2",
+    "egg-session": "^3.1.0",
+    "egg-validate": "^1.0.0",
+    "graphql": "^0.11.7",
+    "lodash": "^4.17.5",
+    "mysql2": "^1.5.2"
   },
   "devDependencies": {
     "autod": "^3.0.1",
@@ -14,7 +23,8 @@
     "egg-ci": "^1.8.0",
     "egg-mock": "^3.15.0",
     "eslint": "^4.18.2",
-    "eslint-config-egg": "^7.0.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
     "webstorm-disable-index": "^1.2.0"
   },
   "engines": {
@@ -37,7 +47,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/MinJieLiu/cutenav-blog-api"
   },
   "author": "LMY",
   "license": "MIT"
