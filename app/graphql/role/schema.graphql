@@ -1,0 +1,41 @@
+type Role {
+  # ID
+  id: ID!
+  # 名称
+  name: String!
+  # 排序
+  sort: Int
+  # 备注
+  remarks: String
+  # 创建日期
+  createdAt: Date
+  # 更新日期
+  updatedAt: Date
+}
+
+input RoleCreateInput {
+  # 名称
+  name: String!
+  # 排序
+  sort: Int
+  # 备注
+  remarks: String
+}
+
+input RoleUpdateInput {
+  # ID
+  id: ID!
+  # 名称
+  name: String
+  # 排序
+  sort: Int
+  # 备注
+  remarks: String
+}
+
+type RoleResult {
+  # 总数
+  count: Int!
+  # 列表
+  rows: [Role]!
+}

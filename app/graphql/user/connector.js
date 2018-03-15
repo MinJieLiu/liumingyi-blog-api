@@ -21,7 +21,7 @@ class UserConnector {
     return idArr.map(currentId => list.find(n => String(n.id) === currentId));
   }
 
-  user(id) {
+  find(id) {
     return this.loader.load(id);
   }
 

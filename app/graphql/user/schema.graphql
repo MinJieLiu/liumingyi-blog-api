@@ -17,6 +17,8 @@ type User {
   avatar: String
   # 介绍
   introduction: String
+  # 角色列表
+  roles: [Role]!
   # 创建日期
   createdAt: Date
   # 更新日期
@@ -57,6 +59,8 @@ input UserCreateInput {
   avatar: String
   # 介绍
   introduction: String
+  # 角色 ID 列表
+  roleIds: [ID]
 }
 
 input UserUpdateInput {
@@ -80,6 +84,8 @@ input UserUpdateInput {
   avatar: String
   # 介绍
   introduction: String
+  # 角色 ID 列表
+  roleIds: [ID]
 }
 
 type UserResult {

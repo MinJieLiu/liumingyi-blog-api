@@ -1,7 +1,7 @@
 module.exports = {
   Query: {
     user(obj, args, ctx) {
-      return ctx.connector.user.user(args.id);
+      return ctx.connector.user.find(args.id);
     },
     userList(obj, args, ctx) {
       return ctx.connector.user.findAndCountAll(args.input);

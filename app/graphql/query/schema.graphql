@@ -1,5 +1,11 @@
-
 type Query {
+  # 用户
   user(id: ID!): User!
+  # 用户列表
   userList(input: UserQueryInput): UserResult!
+
+  # 角色
+  role(id: ID!): Role!
+  # 角色列表
+  roleList(name: String): RoleResult!
 }
