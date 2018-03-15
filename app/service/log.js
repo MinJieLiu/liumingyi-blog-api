@@ -1,6 +1,6 @@
 const egg = require('egg');
 
-const assemblyCondition = require('../util/assembly_condition');
+const assembleCondition = require('../util/assemble_condition');
 const computePage = require('../util/compute_page');
 
 module.exports = class extends egg.Service {
@@ -28,15 +28,15 @@ module.exports = class extends egg.Service {
     return this.ctx.model.Log.findAndCountAll({
       where: Object.assign(
         {},
-        assemblyCondition({ status: { $like: `${status}%` } }, status),
-        assemblyCondition({ method }, method),
-        assemblyCondition({ url: { $like: `${url}%` } }, url),
-        assemblyCondition({ ip: { $like: `${ip}%` } }, ip),
-        assemblyCondition({
+        assembleCondition({ status: { $like: `${status}%` } }, status),
+        assembleCondition({ method }, method),
+        assembleCondition({ url: { $like: `${url}%` } }, url),
+        assembleCondition({ ip: { $like: `${ip}%` } }, ip),
+        assembleCondition({
           createdAt: Object.assign(
             {},
-            assemblyCondition({ $gte: new Date(createdAtStart) }, createdAtStart),
-            assemblyCondition({ $lt: new Date(createdAtEnd) }, createdAtEnd),
+            assembleCondition({ $gte: new Date(createdAtStart) }, createdAtStart),
+            assembleCondition({ $lt: new Date(createdAtEnd) }, createdAtEnd),
           ),
         }, !!(createdAtStart || createdAtEnd)),
       ),

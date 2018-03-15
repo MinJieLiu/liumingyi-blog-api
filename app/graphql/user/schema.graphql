@@ -1,7 +1,52 @@
 type User {
+  # ID
   id: ID!
+  # 用户名
+  username: String!
   # 邮箱
-  email: String!
+  email: String
+  # 手机
+  mobile: String
+  # 启用状态
+  enable: Boolean!
+  # 激活状态
+  isActive: Boolean!
+  # 昵称
+  nickname: String
+  # 头像
+  avatar: String
+  # 介绍
+  introduction: String
+  # 创建日期
+  createdAt: Date
+  # 更新日期
+  updatedAt: Date
+}
+
+input UserQueryInput {
+  # 页数
+  page: Int
+  # 每页条数
+  size: Int
+  # 用户名
+  username: String
+  # 邮箱
+  email: String
+  # 手机
+  mobile: String
+  # 启用状态
+  enable: Boolean
+}
+
+input UserCreateInput {
+  # 用户名
+  username: String!
+  # 邮箱
+  email: String
+  # 手机
+  mobile: String
+  # 密码
+  password: String!
   # 启用状态
   enable: Boolean
   # 激活状态
@@ -10,21 +55,36 @@ type User {
   nickname: String
   # 头像
   avatar: String
-  # 手机
-  mobile: String
   # 介绍
   introduction: String
 }
 
-input UserInput {
-  page: Int
-  size: Int
+input UserUpdateInput {
+  # ID
+  id: ID!
+  # 用户名
+  username: String
+  # 邮箱
   email: String
-  enable: Boolean
+  # 手机
   mobile: String
+  # 密码
+  password: String
+  # 启用状态
+  enable: Boolean
+  # 激活状态
+  isActive: Boolean
+  # 昵称
+  nickname: String
+  # 头像
+  avatar: String
+  # 介绍
+  introduction: String
 }
 
 type UserResult {
+  # 总数
   count: Int!
+  # 列表
   rows: [User]!
 }

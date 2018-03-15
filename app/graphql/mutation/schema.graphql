@@ -1,5 +1,9 @@
 type Mutation {
 
   # 创建用户
-  createUser(input: UserInput): User
+  createUser(input: UserCreateInput!): User
+  # 更新用户
+  updateUser(input: UserUpdateInput!): User
+  # 删除用户
+  deleteUser(id: ID!): Result!
 }

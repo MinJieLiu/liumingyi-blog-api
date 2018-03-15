@@ -1,6 +1,6 @@
 const egg = require('egg');
 
-const assemblyCondition = require('../util/assembly_condition');
+const assembleCondition = require('../util/assemble_condition');
 const computePage = require('../util/compute_page');
 
 module.exports = class extends egg.Service {
@@ -27,7 +27,7 @@ module.exports = class extends egg.Service {
       }],
       where: Object.assign(
         {},
-        assemblyCondition({ name: { $like: `${name}%` } }, name),
+        assembleCondition({ name: { $like: `${name}%` } }, name),
       ),
       offset,
       limit,
@@ -51,7 +51,7 @@ module.exports = class extends egg.Service {
     return this.ctx.model.Role.findAll({
       where: Object.assign(
         {},
-        assemblyCondition({ name: { $like: `${name}%` } }, name),
+        assembleCondition({ name: { $like: `${name}%` } }, name),
       ),
       order: [
         ['sort', 'ASC'],

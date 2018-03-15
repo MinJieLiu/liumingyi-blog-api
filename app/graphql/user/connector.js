@@ -1,7 +1,7 @@
 const DataLoader = require('dataloader');
 const crypto = require('crypto');
 
-const assemblyCondition = require('../../util/assembly_condition');
+const assembleCondition = require('../../util/assemble_condition');
 const computePage = require('../../util/compute_page');
 
 class UserConnector {
@@ -9,8 +9,6 @@ class UserConnector {
     this.ctx = ctx;
 
     this.loader = new DataLoader(id => this.show(id));
-
-    this.listLoader = new DataLoader(args => this.findAndCountAll(args));
   }
 
   async show(idArr) {
@@ -18,8 +16,13 @@ class UserConnector {
       where: {
         id: idArr,
       },
-    }).then(us => us.map(u => u.toJSON()));
+      raw: true,
+    });
     return idArr.map(currentId => list.find(n => String(n.id) === currentId));
+  }
+
+  user(id) {
+    return this.loader.load(id);
   }
 
   /**
@@ -28,7 +31,10 @@ class UserConnector {
    * @return {Promise} - result
    */
   async findAndCountAll(query = {}) {
-    const { defaultPage, defaultSize } = this.ctx.config.pages;
+    const {
+      config: { pages: { defaultPage, defaultSize } },
+      Sequelize: { Op },
+    } = this.ctx.app;
     const {
       page = defaultPage,
       size = defaultSize,
@@ -37,30 +43,17 @@ class UserConnector {
       mobile,
     } = query;
 
-    const { offset, limit } = computePage(page, size);
-
-    // Query
     return this.ctx.model.User.findAndCountAll({
-      where: Object.assign(
-        {},
-        assemblyCondition({ email: { $like: `${email}%` } }, email),
-        assemblyCondition({ enable }, enable),
-        assemblyCondition({ mobile: { $like: `${mobile}%` } }, mobile),
-      ),
-      offset,
-      limit,
+      where: {
+        ...assembleCondition({ email: { [Op.like]: `${email}%` } }, email),
+        ...assembleCondition({ enable }, enable),
+        ...assembleCondition({ mobile: { [Op.like]: `${mobile}%` } }, mobile),
+      },
+      ...computePage(page, size),
       order: [
         ['updatedAt', 'DESC'],
       ],
-    }).then(us => us.map(u => u.toJSON()));
-  }
-
-  user(id) {
-    return this.loader.load(id);
-  }
-
-  userList(args) {
-    return this.listLoader.load(args);
+    });
   }
 
   async create(body) {
@@ -75,12 +68,45 @@ class UserConnector {
     const data = user.get({ plain: true });
     if (roleIds) {
       const roles = await Role.findAll({
-        where: { id: { $in: roleIds } },
+        where: { id: roleIds },
       });
       await user.setRoles(roles);
       data.roles = roles;
     }
     return data;
+  }
+
+  async update(body) {
+    const { id, roleIds } = body;
+    const { User, Role } = this.ctx.model;
+    let user = await User.findById(id);
+    if (!user) {
+      throw new Error('未找到用户');
+    }
+    // 有密码则加密修改
+    const { password } = body;
+    if (password) {
+      Object.assign(body, {
+        password: crypto.createHash('md5').update(password).digest('hex'),
+      });
+    }
+    // 更新
+    user = await user.update(body);
+    const data = user.get({ plain: true });
+    // 更新关系
+    if (roleIds) {
+      const roles = await Role.findAll({
+        where: { id: roleIds },
+      });
+      await user.setRoles(roles);
+      data.roles = roles;
+    }
+    return data;
+  }
+
+  async destroy(id) {
+    const result = await this.ctx.model.User.destroy({ where: { id } });
+    return { result };
   }
 }
 

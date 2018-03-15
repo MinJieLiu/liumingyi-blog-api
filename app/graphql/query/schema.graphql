@@ -1,5 +1,5 @@
 
 type Query {
-  user(id: ID!): User
-  userList(input: UserInput): UserResult!
+  user(id: ID!): User!
+  userList(input: UserQueryInput): UserResult!
 }

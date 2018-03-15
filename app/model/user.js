@@ -4,11 +4,23 @@ module.exports = (app) => {
   const { STRING, INTEGER } = app.Sequelize;
   const User = model.define('user', {
 
+    username: {
+      type: STRING(64),
+      unique: true,
+      comment: '用户名',
+    },
+
     email: {
       type: STRING(100),
       unique: true,
       validate: { isEmail: true },
       comment: '邮箱',
+    },
+
+    mobile: {
+      type: STRING(20),
+      unique: true,
+      comment: '手机',
     },
 
     password: {
@@ -44,11 +56,6 @@ module.exports = (app) => {
       comment: '头像',
     },
 
-    mobile: {
-      type: STRING(20),
-      comment: '手机',
-    },
-
     introduction: {
       type: STRING(255),
       comment: '介绍',
@@ -57,7 +64,7 @@ module.exports = (app) => {
     tableName: 'sys_users',
     comment: '用户表',
     indexes: [
-      { fields: ['email', 'password', 'enable', 'isActive', 'mobile'] },
+      { fields: ['username', 'email', 'password', 'enable', 'isActive', 'mobile'] },
     ],
   });
 
