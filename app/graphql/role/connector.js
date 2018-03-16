@@ -1,15 +1,14 @@
 const DataLoader = require('dataloader');
 
 const assembleCondition = require('../../util/assemble_condition');
-const computePage = require('../../util/compute_page');
 
 class RoleConnector {
   constructor(ctx) {
     this.ctx = ctx;
 
-    this.loader = new DataLoader(id => this.show(id));
+    this.showLoader = new DataLoader(id => this.show(id));
 
-    this.roleLoader = new DataLoader(id => this.showByUserId(id));
+    this.showByUserLoader = new DataLoader(id => this.showByUserId(id));
   }
 
   async show(idArr) {
@@ -37,11 +36,11 @@ class RoleConnector {
   }
 
   find(id) {
-    return this.loader.load(id);
+    return this.showLoader.load(id);
   }
 
   findByUserId(userId) {
-    return this.roleLoader.load(userId);
+    return this.showByUserLoader.load(userId);
   }
 
   /**
@@ -51,12 +50,9 @@ class RoleConnector {
    */
   async findAndCountAll(query = {}) {
     const {
-      config: { pages: { defaultPage, defaultSize } },
       Sequelize: { Op },
     } = this.ctx.app;
     const {
-      page = defaultPage,
-      size = defaultSize,
       name,
     } = query;
 
@@ -65,7 +61,6 @@ class RoleConnector {
       where: {
         ...assembleCondition({ name: { [Op.like]: `${name}%` } }, name),
       },
-      ...computePage(page, size),
       order: [
         ['sort', 'ASC'],
       ],
@@ -92,6 +87,9 @@ class RoleConnector {
     const { menuIds } = body;
     const { Role, Menu } = this.ctx.model;
     let role = await Role.findById(body.id);
+    if (!role) {
+      throw new Error('未找到角色');
+    }
     // 更新
     role = await role.update(body);
     const data = role.get({ plain: true });

@@ -8,4 +8,9 @@ type Query {
   role(id: ID!): Role!
   # 角色列表
   roleList(name: String): RoleResult!
+
+  # 菜单
+  menu(id: ID!): Menu!
+  # 角色列表
+  menuList(name: String): MenuResult!
 }

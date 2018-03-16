@@ -13,4 +13,11 @@ type Mutation {
   updateRole(input: RoleUpdateInput!): Role
   # 删除角色
   deleteRole(id: ID!): Result!
+
+  # 创建菜单
+  createMenu(input: MenuCreateInput!): Menu
+  # 更新菜单
+  updateMenu(input: MenuUpdateInput!): Menu
+  # 删除菜单
+  deleteMenu(id: ID!): Result!
 }

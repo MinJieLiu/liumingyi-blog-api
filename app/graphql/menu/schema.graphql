@@ -1,0 +1,71 @@
+type Menu {
+  # ID
+  id: ID!
+  # 上级 ID
+  parentId: ID!
+  # 名称
+  name: String!
+  # 类型
+  type: Int!
+  # 启用
+  enable: Boolean!
+  # 标识
+  permission: String!
+  # 图标
+  icon: String
+  # 路径
+  pathname: String
+  # 排序
+  sort: Int
+  # 创建日期
+  createdAt: Date
+  # 更新日期
+  updatedAt: Date
+}
+
+input MenuCreateInput {
+  # 上级 ID
+  parentId: ID!
+  # 名称
+  name: String!
+  # 类型
+  type: Int!
+  # 启用
+  enable: Boolean!
+  # 标识
+  permission: String!
+  # 图标
+  icon: String
+  # 路径
+  pathname: String
+  # 排序
+  sort: Int
+}
+
+input MenuUpdateInput {
+  # ID
+  id: ID!
+  # 上级 ID
+  parentId: ID
+  # 名称
+  name: String
+  # 类型
+  type: Int
+  # 启用
+  enable: Boolean
+  # 标识
+  permission: String
+  # 图标
+  icon: String
+  # 路径
+  pathname: String
+  # 排序
+  sort: Int
+}
+
+type MenuResult {
+  # 总数
+  count: Int!
+  # 列表
+  rows: [Menu]!
+}

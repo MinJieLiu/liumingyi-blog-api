@@ -5,6 +5,8 @@ type Role {
   name: String!
   # 排序
   sort: Int
+  # 菜单列表
+  menus: [Menu]!
   # 备注
   remarks: String
   # 创建日期
@@ -20,6 +22,8 @@ input RoleCreateInput {
   sort: Int
   # 备注
   remarks: String
+  # 菜单 ID 列表
+  menuIds: [ID]
 }
 
 input RoleUpdateInput {
@@ -31,6 +35,8 @@ input RoleUpdateInput {
   sort: Int
   # 备注
   remarks: String
+  # 菜单 ID 列表
+  menuIds: [ID]
 }
 
 type RoleResult {

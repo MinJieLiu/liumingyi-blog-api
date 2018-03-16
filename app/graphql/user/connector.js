@@ -8,7 +8,7 @@ class UserConnector {
   constructor(ctx) {
     this.ctx = ctx;
 
-    this.loader = new DataLoader(id => this.show(id));
+    this.showLoader = new DataLoader(id => this.show(id));
   }
 
   async show(idArr) {
@@ -22,7 +22,7 @@ class UserConnector {
   }
 
   find(id) {
-    return this.loader.load(id);
+    return this.showLoader.load(id);
   }
 
   /**

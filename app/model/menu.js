@@ -7,7 +7,7 @@ module.exports = (app) => {
     parentId: {
       type: INTEGER,
       allowNull: false,
-      comment: '上级ID',
+      comment: '上级 ID',
     },
 
     name: {
