@@ -1,9 +1,8 @@
-module.exports = ({ router, controller }) => {
+module.exports = (app) => {
+  const { router, controller } = app;
   // home
   router.get('/', controller.home.index);
 
-  // 登录
-  router.post('/login', controller.auth.login);
-  // 验证码
-  router.post('/captcha', controller.auth.captcha);
+  // github 鉴权
+  app.passport.mount('github');
 };

@@ -18,7 +18,7 @@ class MenuConnector {
       },
       raw: true,
     });
-    return idArr.map(currentId => list.find(n => String(n.id) === currentId));
+    return idArr.map(currentId => list.find(n => n.id === currentId));
   }
 
   async showByRoleId(userIdArr) {

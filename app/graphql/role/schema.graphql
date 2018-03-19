@@ -1,6 +1,6 @@
 type Role {
   # ID
-  id: ID!
+  id: Int!
   # 名称
   name: String!
   # 排序
@@ -23,12 +23,12 @@ input RoleCreateInput {
   # 备注
   remarks: String
   # 菜单 ID 列表
-  menuIds: [ID]
+  menuIds: [Int]
 }
 
 input RoleUpdateInput {
   # ID
-  id: ID!
+  id: Int!
   # 名称
   name: String
   # 排序
@@ -36,7 +36,7 @@ input RoleUpdateInput {
   # 备注
   remarks: String
   # 菜单 ID 列表
-  menuIds: [ID]
+  menuIds: [Int]
 }
 
 type RoleResult {

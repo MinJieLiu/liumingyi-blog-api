@@ -22,6 +22,11 @@ module.exports = (appInfo) => {
     'graphql',
   ];
 
+  config.passportGithub = {
+    key: '2a23a8643ef32a94d3f5',
+    secret: 'b4a30cad94f4f0003d0e50c95ddf86bdfb55c393',
+  };
+
   config.sequelize = {
     dialect: 'mysql',
     database: 'liumingyi-blog',

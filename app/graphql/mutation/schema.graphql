@@ -5,19 +5,19 @@ type Mutation {
   # 更新用户
   updateUser(input: UserUpdateInput!): User
   # 删除用户
-  deleteUser(id: ID!): Result!
+  deleteUser(id: Int!): Result!
 
   # 创建角色
   createRole(input: RoleCreateInput!): Role
   # 更新角色
   updateRole(input: RoleUpdateInput!): Role
   # 删除角色
-  deleteRole(id: ID!): Result!
+  deleteRole(id: Int!): Result!
 
   # 创建菜单
   createMenu(input: MenuCreateInput!): Menu
   # 更新菜单
   updateMenu(input: MenuUpdateInput!): Menu
   # 删除菜单
-  deleteMenu(id: ID!): Result!
+  deleteMenu(id: Int!): Result!
 }

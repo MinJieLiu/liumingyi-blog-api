@@ -1,6 +1,6 @@
 type User {
   # ID
-  id: ID!
+  id: Int!
   # 用户名
   username: String!
   # 邮箱
@@ -19,6 +19,8 @@ type User {
   introduction: String
   # 角色列表
   roles: [Role]!
+  # 授权列表
+  authorizations: [Authorization]!
   # 创建日期
   createdAt: Date
   # 更新日期
@@ -60,12 +62,12 @@ input UserCreateInput {
   # 介绍
   introduction: String
   # 角色 ID 列表
-  roleIds: [ID]
+  roleIds: [Int]
 }
 
 input UserUpdateInput {
   # ID
-  id: ID!
+  id: Int!
   # 用户名
   username: String
   # 邮箱
@@ -85,7 +87,7 @@ input UserUpdateInput {
   # 介绍
   introduction: String
   # 角色 ID 列表
-  roleIds: [ID]
+  roleIds: [Int]
 }
 
 type UserResult {

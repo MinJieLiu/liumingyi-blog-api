@@ -1,0 +1,12 @@
+type Authorization {
+  # ID
+  id: Int!
+  # 提供者
+  provider: String!
+  # 用户 ID
+  userId: Int!
+  # 创建日期
+  createdAt: Date
+  # 更新日期
+  updatedAt: Date
+}

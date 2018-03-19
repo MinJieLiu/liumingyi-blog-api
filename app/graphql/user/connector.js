@@ -18,7 +18,7 @@ class UserConnector {
       },
       raw: true,
     });
-    return idArr.map(currentId => list.find(n => String(n.id) === currentId));
+    return idArr.map(currentId => list.find(n => n.id === currentId));
   }
 
   find(id) {
@@ -73,6 +73,21 @@ class UserConnector {
       await user.setRoles(roles);
       data.roles = roles;
     }
+    return data;
+  }
+
+  /**
+   * 通过授权的方式创建用户
+   * @param provider
+   * @param body
+   */
+  async createWithProvider({ provider, ...body }) {
+    const data = await this.create(body);
+    // 创建授权信息
+    await this.ctx.model.Authorization.create({
+      provider,
+      userId: data.id,
+    });
     return data;
   }
 
