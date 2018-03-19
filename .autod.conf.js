@@ -9,7 +9,13 @@ module.exports = {
   ],
   dep: [
     'egg',
+    'egg-cors',
+    'egg-graphql',
+    'egg-passport',
+    'egg-passport-github',
     'egg-scripts',
+    'egg-sequelize',
+    'egg-validate',
   ],
   devdep: [
     'egg-ci',
@@ -18,7 +24,6 @@ module.exports = {
     'autod',
     'autod-egg',
     'eslint',
-    'eslint-config-egg',
     'webstorm-disable-index',
   ],
   exclude: [

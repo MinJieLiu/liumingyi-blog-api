@@ -24,7 +24,7 @@ module.exports = (appInfo) => {
 
   config.sequelize = {
     dialect: 'mysql',
-    database: 'cutenav-blog',
+    database: 'liumingyi-blog',
     host: 'localhost',
     port: '3306',
     username: 'root',
