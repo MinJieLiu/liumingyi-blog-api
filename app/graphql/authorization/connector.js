@@ -24,9 +24,8 @@ class AuthorizationConnector {
 
   async login(body) {
     const { username, password } = body;
-    const { User } = this.ctx.model;
     // 查找
-    const data = await User.findOne({
+    const data = await this.ctx.model.User.findOne({
       where: {
         username,
         password: crypto.createHash('md5').update(password).digest('hex'),

@@ -20,6 +20,7 @@ module.exports = (appInfo) => {
   config.middleware = [
     'errorHandler',
     'graphql',
+    'roleHandler',
   ];
 
   config.passportGithub = {
