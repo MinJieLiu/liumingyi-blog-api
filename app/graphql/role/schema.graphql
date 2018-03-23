@@ -1,5 +1,5 @@
 type Role {
-  # ID
+  # Id
   id: Int!
   # 名称
   name: String!
@@ -22,12 +22,12 @@ input RoleCreateInput {
   sort: Int
   # 备注
   remarks: String
-  # 菜单 ID 列表
+  # 菜单 Id 列表
   menuIds: [Int]
 }
 
 input RoleUpdateInput {
-  # ID
+  # Id
   id: Int!
   # 名称
   name: String
@@ -35,7 +35,7 @@ input RoleUpdateInput {
   sort: Int
   # 备注
   remarks: String
-  # 菜单 ID 列表
+  # 菜单 Id 列表
   menuIds: [Int]
 }
 

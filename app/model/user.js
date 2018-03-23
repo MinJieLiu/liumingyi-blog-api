@@ -64,7 +64,7 @@ module.exports = (app) => {
     tableName: 'sys_users',
     comment: '用户表',
     indexes: [
-      { fields: ['username', 'email', 'password', 'enable', 'isActive', 'mobile'] },
+      { fields: ['username', 'email', 'enable', 'isActive', 'mobile'] },
     ],
   });
 

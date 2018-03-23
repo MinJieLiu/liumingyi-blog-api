@@ -88,7 +88,7 @@ class RoleConnector {
     const { Role, Menu } = this.ctx.model;
     let role = await Role.findById(body.id);
     if (!role) {
-      throw new Error('未找到角色');
+      throw new Error('未找到该条数据');
     }
     // 更新
     role = await role.update(body);

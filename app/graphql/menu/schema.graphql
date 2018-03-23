@@ -1,7 +1,7 @@
 type Menu {
-  # ID
+  # Id
   id: Int!
-  # 上级 ID
+  # 上级 Id
   parentId: Int!
   # 名称
   name: String!
@@ -24,7 +24,7 @@ type Menu {
 }
 
 input MenuCreateInput {
-  # 上级 ID
+  # 上级 Id
   parentId: Int!
   # 名称
   name: String!
@@ -43,9 +43,9 @@ input MenuCreateInput {
 }
 
 input MenuUpdateInput {
-  # ID
+  # Id
   id: Int!
-  # 上级 ID
+  # 上级 Id
   parentId: Int
   # 名称
   name: String

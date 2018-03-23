@@ -96,7 +96,7 @@ class UserConnector {
     const { User, Role } = this.ctx.model;
     let user = await User.findById(id);
     if (!user) {
-      throw new Error('未找到用户');
+      throw new Error('未找到该条数据');
     }
     // 有密码则加密修改
     const { password } = body;

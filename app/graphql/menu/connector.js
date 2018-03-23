@@ -76,7 +76,7 @@ class MenuConnector {
     const menu = await this.ctx.model.Menu.findById(body.id);
     // 更新
     if (!menu) {
-      throw new Error('未找到菜单');
+      throw new Error('未找到该条数据');
     }
     const data = await menu.update(body);
     return data.get({ plain: true });

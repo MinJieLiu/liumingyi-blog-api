@@ -12,7 +12,7 @@ module.exports = (app) => {
     userId: {
       type: INTEGER,
       allowNull: false,
-      comment: '用户 ID',
+      comment: '用户 Id',
     },
 
   }, {

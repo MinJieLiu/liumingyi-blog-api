@@ -1,5 +1,5 @@
 type User {
-  # ID
+  # Id
   id: Int!
   # 用户名
   username: String!
@@ -61,12 +61,12 @@ input UserCreateInput {
   avatar: String
   # 介绍
   introduction: String
-  # 角色 ID 列表
+  # 角色 Id 列表
   roleIds: [Int]
 }
 
 input UserUpdateInput {
-  # ID
+  # Id
   id: Int!
   # 用户名
   username: String
@@ -86,7 +86,7 @@ input UserUpdateInput {
   avatar: String
   # 介绍
   introduction: String
-  # 角色 ID 列表
+  # 角色 Id 列表
   roleIds: [Int]
 }
 
