@@ -5,7 +5,7 @@ module.exports = (app) => {
     INTEGER,
     TEXT,
   } = app.Sequelize;
-  const CmsPost = model.define('cmsPost', {
+  const Post = model.define('post', {
 
     name: {
       type: STRING(200),
@@ -34,6 +34,11 @@ module.exports = (app) => {
       comment: '类型',
     },
 
+    thumbnail: {
+      type: STRING(255),
+      comment: '缩略图',
+    },
+
     excerpt: {
       type: TEXT,
       comment: '摘抄',
@@ -55,7 +60,7 @@ module.exports = (app) => {
       comment: '评论状态',
     },
 
-    order: {
+    sort: {
       type: INTEGER,
       defaultValue: 0,
       comment: '排序',
@@ -69,15 +74,15 @@ module.exports = (app) => {
     ],
   });
 
-  CmsPost.associate = () => {
-    model.CmsPost.hasMany(model.CmsComment);
+  Post.associate = () => {
+    model.Post.hasMany(model.Comment);
 
-    model.CmsPost.belongsTo(model.CmsGroup);
+    model.Post.belongsTo(model.Group);
 
-    model.CmsPost.belongsToMany(model.CmsTag, {
+    model.Post.belongsToMany(model.Tag, {
       through: 'cms_post_tags',
     });
   };
 
-  return CmsPost;
+  return Post;
 };

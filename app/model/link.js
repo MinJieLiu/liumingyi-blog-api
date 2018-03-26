@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const { model } = app;
   const { STRING, INTEGER } = app.Sequelize;
-  return model.define('cmsLink', {
+  return model.define('link', {
 
     url: {
       type: STRING(255),
@@ -22,7 +22,7 @@ module.exports = (app) => {
 
     target: {
       type: STRING(25),
-      comment: 'target',
+      comment: '目标',
     },
 
     description: {
@@ -36,7 +36,7 @@ module.exports = (app) => {
       comment: '可见',
     },
 
-    order: {
+    sort: {
       type: INTEGER,
       defaultValue: 0,
       comment: '排序',

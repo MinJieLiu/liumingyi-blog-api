@@ -1,0 +1,78 @@
+type Link {
+  # Id
+  id: Int!
+  # 链接
+  url: String!
+  # 名称
+  name: String!
+  # 图片
+  image: String
+  # 目标
+  target: String
+  # 简介
+  description: String
+  # 可见
+  visible: Int!
+  # 排序
+  sort: Int!
+  # 创建日期
+  createdAt: Date
+  # 更新日期
+  updatedAt: Date
+}
+
+input LinkQueryInput {
+  # 页数
+  page: Int
+  # 每页条数
+  size: Int
+  # 链接
+  url: String
+  # 名称
+  name: String
+  # 可见
+  visible: Int
+}
+
+input LinkCreateInput {
+  # 链接
+  url: String!
+  # 名称
+  name: String!
+  # 图片
+  image: String
+  # 目标
+  target: String
+  # 简介
+  description: String
+  # 可见
+  visible: Int!
+  # 排序
+  sort: Int!
+}
+
+input LinkUpdateInput {
+  # Id
+  id: Int!
+  # 链接
+  url: String
+  # 名称
+  name: String
+  # 图片
+  image: String
+  # 目标
+  target: String
+  # 简介
+  description: String
+  # 可见
+  visible: Int
+  # 排序
+  sort: Int
+}
+
+type LinkResult {
+  # 总数
+  count: Int!
+  # 列表
+  rows: [Link]!
+}

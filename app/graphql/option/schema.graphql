@@ -1,0 +1,40 @@
+type Option {
+  # Id
+  id: Int!
+  # 上级 Id
+  name: String!
+  # 名称
+  value: String!
+  # 创建日期
+  createdAt: Date
+  # 更新日期
+  updatedAt: Date
+}
+
+input OptionQueryInput {
+  # 名称
+  name: String
+}
+
+input OptionCreateInput {
+  # 上级 Id
+  name: String!
+  # 名称
+  value: String!
+}
+
+input OptionUpdateInput {
+  # Id
+  id: Int!
+  # 上级 Id
+  name: String
+  # 名称
+  value: String
+}
+
+type OptionResult {
+  # 总数
+  count: Int!
+  # 列表
+  rows: [Option]!
+}

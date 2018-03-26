@@ -1,0 +1,102 @@
+type Post {
+  # Id
+  id: Int!
+  # 名称
+  name: String
+  # 标题
+  title: String!
+  # 用户 Id
+  userId: Int
+  # 分组 Id
+  groupId: Int
+  # 类型
+  type: String!
+  # 缩略图
+  thumbnail: String
+  # 摘抄
+  excerpt: String
+  # 内容
+  content: String
+  # 状态
+  status: String!
+  # 评论状态
+  commentStatus: String!
+  # 排序
+  sort: Int!
+  # 创建日期
+  createdAt: Date
+  # 更新日期
+  updatedAt: Date
+}
+
+input PostQueryInput {
+  # 页数
+  page: Int
+  # 每页条数
+  size: Int
+  # 标题
+  title: String
+  # 用户 Id
+  userId: Int
+  # 分组 Id
+  groupId: Int
+  # 类型
+  type: String
+  # 状态
+  status: String
+}
+
+input PostCreateInput {
+  # 名称
+  name: String
+  # 标题
+  title: String!
+  # 分组 Id
+  groupId: Int
+  # 类型
+  type: String!
+  # 缩略图
+  thumbnail: String
+  # 摘抄
+  excerpt: String
+  # 内容
+  content: String
+  # 状态
+  status: String
+  # 评论状态
+  commentStatus: String
+  # 排序
+  sort: Int!
+}
+
+input PostUpdateInput {
+  # Id
+  id: Int!
+  # 名称
+  name: String
+  # 标题
+  title: String
+  # 分组 Id
+  groupId: Int
+  # 类型
+  type: String
+  # 缩略图
+  thumbnail: String
+  # 摘抄
+  excerpt: String
+  # 内容
+  content: String
+  # 状态
+  status: String
+  # 评论状态
+  commentStatus: String
+  # 排序
+  sort: Int
+}
+
+type PostResult {
+  # 总数
+  count: Int!
+  # 列表
+  rows: [Post]!
+}

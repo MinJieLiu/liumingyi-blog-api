@@ -1,0 +1,58 @@
+type Comment {
+  # Id
+  id: Int!
+  # 文章 Id
+  postId: Int!
+  # 用户 Id
+  userId: Int
+  # 上级 Id
+  parentId: Int!
+  # 内容
+  content: String!
+  # 状态
+  status: String!
+  # 创建日期
+  createdAt: Date
+  # 更新日期
+  updatedAt: Date
+}
+
+input CommentQueryInput {
+  # 页数
+  page: Int
+  # 每页条数
+  size: Int
+  # 用户 Id
+  userId: Int
+  # 文章 Id
+  postId: Int
+  # 状态
+  status: String
+}
+
+input CommentCreateInput {
+  # 文章 Id
+  postId: Int!
+  # 上级 Id
+  parentId: Int
+  # 内容
+  content: String!
+  # 状态
+  status: String
+}
+
+input CommentUpdateInput {
+  # Id
+  id: Int!
+  # 内容
+  content: String
+  # 状态
+  status: String
+}
+
+type CommentResult {
+  # 总数
+  count: Int!
+  # 列表
+  rows: [Comment]!
+}

@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const { model } = app;
-  const { STRING, TEXT } = app.Sequelize;
-  return model.define('cmsOption', {
+  const { STRING } = app.Sequelize;
+  return model.define('option', {
 
     name: {
       type: STRING(200),
@@ -10,13 +10,13 @@ module.exports = (app) => {
     },
 
     value: {
-      type: TEXT,
+      type: STRING(255),
       allowNull: false,
       comment: '值',
     },
 
   }, {
-    tableName: 'cms_options',
+    tableName: 'sys_options',
     comment: '选项表',
     indexes: [
       { fields: ['name'] },

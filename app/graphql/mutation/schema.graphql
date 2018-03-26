@@ -20,4 +20,46 @@ type Mutation {
   updateMenu(input: MenuUpdateInput!): Menu
   # 删除菜单
   deleteMenu(id: Int!): Result!
+
+  # 创建设置
+  createOption(input: OptionCreateInput!): Option
+  # 更新设置
+  updateOption(input: OptionUpdateInput!): Option
+  # 删除设置
+  deleteOption(id: Int!): Result!
+
+  # 创建分组
+  createGroup(input: GroupCreateInput!): Group
+  # 更新分组
+  updateGroup(input: GroupUpdateInput!): Group
+  # 删除分组
+  deleteGroup(id: Int!): Result!
+
+  # 创建标签
+  createTag(input: TagCreateInput!): Tag
+  # 更新标签
+  updateTag(input: TagUpdateInput!): Tag
+  # 删除标签
+  deleteTag(id: Int!): Result!
+
+  # 创建文章
+  createPost(input: PostCreateInput!): Post
+  # 更新文章
+  updatePost(input: PostUpdateInput!): Post
+  # 删除文章
+  deletePost(id: Int!): Result!
+
+  # 创建评论
+  createComment(input: CommentCreateInput!): Comment
+  # 更新评论
+  updateComment(input: CommentUpdateInput!): Comment
+  # 删除评论
+  deleteComment(id: Int!): Result!
+
+  # 创建链接
+  createLink(input: LinkCreateInput!): Link
+  # 更新链接
+  updateLink(input: LinkUpdateInput!): Link
+  # 删除链接
+  deleteLink(id: Int!): Result!
 }

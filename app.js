@@ -25,8 +25,8 @@ module.exports = (app) => {
   });
 
   // 序列化用户信息
-  app.passport.serializeUser(async (ctx, user) => ({ id: user.id }));
+  app.passport.serializeUser((ctx, user) => ({ id: user.id }));
 
   // 反序列化用户信息
-  app.passport.deserializeUser(async (ctx, user) => ctx.connector.user.find(user.id));
+  app.passport.deserializeUser((ctx, user) => ctx.connector.user.find(user.id));
 };

@@ -1,0 +1,44 @@
+type Tag {
+  # Id
+  id: Int!
+  # 名称
+  name: String!
+  # 排序
+  sort: Int!
+  # 创建日期
+  createdAt: Date
+  # 更新日期
+  updatedAt: Date
+}
+
+input TagQueryInput {
+  # 页数
+  page: Int
+  # 每页条数
+  size: Int
+  # 名称
+  name: String
+}
+
+input TagCreateInput {
+  # 名称
+  name: String!
+  # 排序
+  sort: Int!
+}
+
+input TagUpdateInput {
+  # Id
+  id: Int!
+  # 名称
+  name: String
+  # 排序
+  sort: Int
+}
+
+type TagResult {
+  # 总数
+  count: Int!
+  # 列表
+  rows: [Tag]!
+}

@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const { model } = app;
   const { STRING, INTEGER, TEXT } = app.Sequelize;
-  const CmsComment = model.define('cmsComment', {
+  const Comment = model.define('comment', {
 
     postId: {
       type: INTEGER,
@@ -18,11 +18,6 @@ module.exports = (app) => {
       type: INTEGER,
       allowNull: false,
       comment: '上级 Id',
-    },
-
-    type: {
-      type: STRING(20),
-      comment: '类型',
     },
 
     content: {
@@ -43,9 +38,9 @@ module.exports = (app) => {
     ],
   });
 
-  CmsComment.associate = () => {
-    model.CmsComment.belongsTo(model.CmsPost);
+  Comment.associate = () => {
+    model.Comment.belongsTo(model.Post);
   };
 
-  return CmsComment;
+  return Comment;
 };

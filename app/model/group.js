@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const { model } = app;
   const { STRING, INTEGER } = app.Sequelize;
-  const CmsGroup = model.define('cmsGroup', {
+  const Group = model.define('group', {
 
     parentId: {
       type: INTEGER,
@@ -15,10 +15,16 @@ module.exports = (app) => {
       comment: '名称',
     },
 
-    group: {
+    enable: {
       type: INTEGER,
       defaultValue: 0,
-      comment: '分组',
+      comment: '启用状态',
+    },
+
+    sort: {
+      type: INTEGER,
+      defaultValue: 1,
+      comment: '排序',
     },
 
     description: {
@@ -34,9 +40,9 @@ module.exports = (app) => {
     ],
   });
 
-  CmsGroup.associate = () => {
-    model.CmsGroup.hasMany(model.CmsPost);
+  Group.associate = () => {
+    model.Group.hasMany(model.Post);
   };
 
-  return CmsGroup;
+  return Group;
 };

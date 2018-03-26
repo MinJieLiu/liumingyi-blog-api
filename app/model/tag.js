@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const { model } = app;
   const { STRING, INTEGER } = app.Sequelize;
-  const CmsTag = model.define('cmsTag', {
+  const Tag = model.define('tag', {
 
     name: {
       type: STRING(255),
@@ -9,10 +9,10 @@ module.exports = (app) => {
       comment: '名称',
     },
 
-    group: {
+    sort: {
       type: INTEGER,
       defaultValue: 0,
-      comment: '分组',
+      comment: '排序',
     },
 
   }, {
@@ -23,11 +23,11 @@ module.exports = (app) => {
     ],
   });
 
-  CmsTag.associate = () => {
-    model.CmsTag.belongsToMany(model.CmsPost, {
+  Tag.associate = () => {
+    model.Tag.belongsToMany(model.Post, {
       through: 'cms_post_tags',
     });
   };
 
-  return CmsTag;
+  return Tag;
 };

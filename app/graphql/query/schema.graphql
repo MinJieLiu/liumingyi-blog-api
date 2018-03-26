@@ -19,4 +19,34 @@ type Query {
   menu(id: Int!): Menu!
   # 角色列表
   menuList(name: String): MenuResult!
+
+  # 设置
+  option(id: Int!): Option!
+  # 设置列表
+  optionList(input: OptionQueryInput): OptionResult!
+
+  # 分组
+  group(id: Int!): Group!
+  # 分组列表
+  groupList(input: GroupQueryInput): GroupResult!
+
+  # 标签
+  tag(id: Int!): Tag!
+  # 标签列表
+  tagList(input: TagQueryInput): TagResult!
+
+  # 文章
+  post(id: Int!): Post!
+  # 文章列表
+  postList(input: PostQueryInput): PostResult!
+
+  # 评论
+  comment(id: Int!): Comment!
+  # 评论列表
+  commentList(input: CommentQueryInput): CommentResult!
+
+  # 链接
+  link(id: Int!): Link!
+  # 分组列表
+  linkList(input: LinkQueryInput): LinkResult!
 }

@@ -1,0 +1,60 @@
+type Group {
+  # Id
+  id: Int!
+  # 上级 Id
+  parentId: Int!
+  # 名称
+  name: String!
+  # 启用状态
+  enable: Boolean!
+  # 排序
+  sort: Int!
+  # 描述
+  description: String
+  # 创建日期
+  createdAt: Date
+  # 更新日期
+  updatedAt: Date
+}
+
+input GroupQueryInput {
+  # 名称
+  name: String
+  # 启用状态
+  enable: Boolean
+}
+
+input GroupCreateInput {
+  # 上级 Id
+  parentId: Int!
+  # 名称
+  name: String!
+  # 启用状态
+  enable: Boolean!
+  # 排序
+  sort: Int!
+  # 描述
+  description: String
+}
+
+input GroupUpdateInput {
+  # Id
+  id: Int!
+  # 上级 Id
+  parentId: Int
+  # 名称
+  name: String
+  # 启用状态
+  enable: Boolean
+  # 排序
+  sort: Int
+  # 描述
+  description: String
+}
+
+type GroupResult {
+  # 总数
+  count: Int!
+  # 列表
+  rows: [Group]!
+}
