@@ -5,7 +5,7 @@ module.exports = (app) => {
     INTEGER,
     TEXT,
   } = app.Sequelize;
-  const CmsPost = model.define('CmsPost', {
+  const CmsPost = model.define('cmsPost', {
 
     name: {
       type: STRING(200),

@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const { model } = app;
   const { STRING, INTEGER } = app.Sequelize;
-  const CmsTag = model.define('CmsTag', {
+  const CmsTag = model.define('cmsTag', {
 
     name: {
       type: STRING(255),

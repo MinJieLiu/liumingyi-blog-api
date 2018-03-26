@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const { model } = app;
   const { STRING, INTEGER } = app.Sequelize;
-  const CmsGroup = model.define('CmsGroup', {
+  const CmsGroup = model.define('cmsGroup', {
 
     parentId: {
       type: INTEGER,

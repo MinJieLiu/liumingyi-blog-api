@@ -6,7 +6,7 @@ module.exports = class extends egg.Service {
   async userMenus(id) {
     const { User, Role, Menu } = this.ctx.model;
     // 所有菜单
-    const allMenu = await this.ctx.service.menu.findAll();
+    const allMenu = await Menu.findAll();
     // 拥有的菜单
     const ownMenu = await Menu.findAll({
       attributes: ['id', 'parentId'],

@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const { model } = app;
   const { STRING, INTEGER } = app.Sequelize;
-  return model.define('CmsLink', {
+  return model.define('cmsLink', {
 
     url: {
       type: STRING(255),
