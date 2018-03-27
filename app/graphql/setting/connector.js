@@ -2,7 +2,7 @@ const DataLoader = require('dataloader');
 
 const assembleCondition = require('../../util/assemble_condition');
 
-class OptionConnector {
+class SettingConnector {
   constructor(ctx) {
     this.ctx = ctx;
 
@@ -10,7 +10,7 @@ class OptionConnector {
   }
 
   async show(idArr) {
-    const list = await this.ctx.model.Option.findAll({
+    const list = await this.ctx.model.Setting.findAll({
       where: {
         id: idArr,
       },
@@ -37,7 +37,7 @@ class OptionConnector {
       enable,
     } = query;
 
-    return this.ctx.model.Option.findAndCountAll({
+    return this.ctx.model.Setting.findAndCountAll({
       where: {
         ...assembleCondition({ name: { [Op.like]: `${name}%` } }, name),
         ...assembleCondition({ enable }, enable),
@@ -49,24 +49,24 @@ class OptionConnector {
   }
 
   async create(body) {
-    const option = await this.ctx.model.Option.create(body);
-    return option.get({ plain: true });
+    const setting = await this.ctx.model.Setting.create(body);
+    return setting.get({ plain: true });
   }
 
   async update(body) {
-    const option = await this.ctx.model.Option.findById(body.id);
+    const setting = await this.ctx.model.Setting.findById(body.id);
     // 更新
-    if (!option) {
+    if (!setting) {
       throw new Error('未找到该条数据');
     }
-    const data = await option.update(body);
+    const data = await setting.update(body);
     return data.get({ plain: true });
   }
 
   async destroy(id) {
-    const result = await this.ctx.model.Option.destroy({ where: { id } });
+    const result = await this.ctx.model.Setting.destroy({ where: { id } });
     return { result };
   }
 }
 
-module.exports = OptionConnector;
+module.exports = SettingConnector;

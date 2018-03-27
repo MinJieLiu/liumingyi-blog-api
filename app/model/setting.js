@@ -1,7 +1,7 @@
 module.exports = (app) => {
   const { model } = app;
   const { STRING } = app.Sequelize;
-  return model.define('option', {
+  return model.define('setting', {
 
     name: {
       type: STRING(200),
@@ -14,9 +14,8 @@ module.exports = (app) => {
       allowNull: false,
       comment: '值',
     },
-
   }, {
-    tableName: 'sys_options',
+    tableName: 'sys_settings',
     comment: '选项表',
     indexes: [
       { fields: ['name'] },

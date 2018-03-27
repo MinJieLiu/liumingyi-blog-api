@@ -21,9 +21,9 @@ type Query {
   menuList(name: String): MenuResult!
 
   # 设置
-  option(id: Int!): Option!
+  setting(id: Int!): Setting!
   # 设置列表
-  optionList(input: OptionQueryInput): OptionResult!
+  settingList(input: SettingQueryInput): SettingResult!
 
   # 分组
   group(id: Int!): Group!

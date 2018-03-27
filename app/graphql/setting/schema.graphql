@@ -1,4 +1,4 @@
-type Option {
+type Setting {
   # Id
   id: Int!
   # 上级 Id
@@ -11,19 +11,19 @@ type Option {
   updatedAt: Date
 }
 
-input OptionQueryInput {
+input SettingQueryInput {
   # 名称
   name: String
 }
 
-input OptionCreateInput {
+input SettingCreateInput {
   # 上级 Id
   name: String!
   # 名称
   value: String!
 }
 
-input OptionUpdateInput {
+input SettingUpdateInput {
   # Id
   id: Int!
   # 上级 Id
@@ -32,9 +32,9 @@ input OptionUpdateInput {
   value: String
 }
 
-type OptionResult {
+type SettingResult {
   # 总数
   count: Int!
   # 列表
-  rows: [Option]!
+  rows: [Setting]!
 }

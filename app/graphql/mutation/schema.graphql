@@ -22,11 +22,11 @@ type Mutation {
   deleteMenu(id: Int!): Result!
 
   # 创建设置
-  createOption(input: OptionCreateInput!): Option
+  createSetting(input: SettingCreateInput!): Setting
   # 更新设置
-  updateOption(input: OptionUpdateInput!): Option
+  updateSetting(input: SettingUpdateInput!): Setting
   # 删除设置
-  deleteOption(id: Int!): Result!
+  deleteSetting(id: Int!): Result!
 
   # 创建分组
   createGroup(input: GroupCreateInput!): Group
