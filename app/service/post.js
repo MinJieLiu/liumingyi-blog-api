@@ -1,14 +1,16 @@
+const egg = require('egg');
 const DataLoader = require('dataloader');
 
-const assembleCondition = require('../../util/assemble_condition');
-const computePage = require('../../util/compute_page');
+const assembleCondition = require('../util/assemble_condition');
+const computePage = require('../util/compute_page');
 
-class PostConnector {
+module.exports = class extends egg.Service {
   constructor(ctx) {
-    this.ctx = ctx;
+    super(ctx);
 
     this.showLoader = new DataLoader(id => this.show(id));
   }
+
 
   async show(idArr) {
     const list = await this.ctx.model.Post.findAll({
@@ -72,6 +74,4 @@ class PostConnector {
     const result = await this.ctx.model.Post.destroy({ where: { id } });
     return { result };
   }
-}
-
-module.exports = PostConnector;
+};

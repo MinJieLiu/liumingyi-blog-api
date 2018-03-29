@@ -10,7 +10,6 @@ module.exports = {
   dep: [
     'egg',
     'egg-cors',
-    'egg-graphql',
     'egg-passport',
     'egg-passport-github',
     'egg-scripts',

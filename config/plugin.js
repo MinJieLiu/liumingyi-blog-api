@@ -7,7 +7,7 @@ exports.cors = {
 };
 
 exports.graphql = {
-  package: 'egg-graphql',
+  package: 'egg-graphql-apollo',
 };
 
 exports.passport = {

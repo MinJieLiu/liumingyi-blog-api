@@ -1,16 +1,18 @@
+const egg = require('egg');
 const DataLoader = require('dataloader');
 
-const assembleCondition = require('../../util/assemble_condition');
+const assembleCondition = require('../util/assemble_condition');
+const computePage = require('../util/compute_page');
 
-class SettingConnector {
+module.exports = class extends egg.Service {
   constructor(ctx) {
-    this.ctx = ctx;
+    super(ctx);
 
     this.showLoader = new DataLoader(id => this.show(id));
   }
 
   async show(idArr) {
-    const list = await this.ctx.model.Setting.findAll({
+    const list = await this.ctx.model.Comment.findAll({
       where: {
         id: idArr,
       },
@@ -30,18 +32,22 @@ class SettingConnector {
    */
   async findAndCountAll(query = {}) {
     const {
+      config: { pages: { defaultPage, defaultSize } },
       Sequelize: { Op },
     } = this.ctx.app;
     const {
+      page = defaultPage,
+      size = defaultSize,
       name,
       enable,
     } = query;
 
-    return this.ctx.model.Setting.findAndCountAll({
+    return this.ctx.model.Comment.findAndCountAll({
       where: {
         ...assembleCondition({ name: { [Op.like]: `${name}%` } }, name),
         ...assembleCondition({ enable }, enable),
       },
+      ...computePage(page, size),
       order: [
         ['sort', 'DESC'],
       ],
@@ -49,24 +55,22 @@ class SettingConnector {
   }
 
   async create(body) {
-    const setting = await this.ctx.model.Setting.create(body);
-    return setting.get({ plain: true });
+    const comment = await this.ctx.model.Comment.create(body);
+    return comment.get({ plain: true });
   }
 
   async update(body) {
-    const setting = await this.ctx.model.Setting.findById(body.id);
+    const comment = await this.ctx.model.Comment.findById(body.id);
     // 更新
-    if (!setting) {
+    if (!comment) {
       throw new Error('未找到该条数据');
     }
-    const data = await setting.update(body);
+    const data = await comment.update(body);
     return data.get({ plain: true });
   }
 
   async destroy(id) {
-    const result = await this.ctx.model.Setting.destroy({ where: { id } });
+    const result = await this.ctx.model.Comment.destroy({ where: { id } });
     return { result };
   }
-}
-
-module.exports = SettingConnector;
+};

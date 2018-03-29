@@ -1,16 +1,17 @@
+const egg = require('egg');
 const DataLoader = require('dataloader');
 
-const assembleCondition = require('../../util/assemble_condition');
+const assembleCondition = require('../util/assemble_condition');
 
-class LinkConnector {
+module.exports = class extends egg.Service {
   constructor(ctx) {
-    this.ctx = ctx;
+    super(ctx);
 
     this.showLoader = new DataLoader(id => this.show(id));
   }
 
   async show(idArr) {
-    const list = await this.ctx.model.Link.findAll({
+    const list = await this.ctx.model.Setting.findAll({
       where: {
         id: idArr,
       },
@@ -37,7 +38,7 @@ class LinkConnector {
       enable,
     } = query;
 
-    return this.ctx.model.Link.findAndCountAll({
+    return this.ctx.model.Setting.findAndCountAll({
       where: {
         ...assembleCondition({ name: { [Op.like]: `${name}%` } }, name),
         ...assembleCondition({ enable }, enable),
@@ -49,24 +50,22 @@ class LinkConnector {
   }
 
   async create(body) {
-    const link = await this.ctx.model.Link.create(body);
-    return link.get({ plain: true });
+    const setting = await this.ctx.model.Setting.create(body);
+    return setting.get({ plain: true });
   }
 
   async update(body) {
-    const link = await this.ctx.model.Link.findById(body.id);
+    const setting = await this.ctx.model.Setting.findById(body.id);
     // 更新
-    if (!link) {
+    if (!setting) {
       throw new Error('未找到该条数据');
     }
-    const data = await link.update(body);
+    const data = await setting.update(body);
     return data.get({ plain: true });
   }
 
   async destroy(id) {
-    const result = await this.ctx.model.Link.destroy({ where: { id } });
+    const result = await this.ctx.model.Setting.destroy({ where: { id } });
     return { result };
   }
-}
-
-module.exports = LinkConnector;
+};

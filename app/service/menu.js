@@ -1,10 +1,11 @@
+const egg = require('egg');
 const DataLoader = require('dataloader');
 
-const assembleCondition = require('../../util/assemble_condition');
+const assembleCondition = require('../util/assemble_condition');
 
-class MenuConnector {
+module.exports = class extends egg.Service {
   constructor(ctx) {
-    this.ctx = ctx;
+    super(ctx);
 
     this.showLoader = new DataLoader(id => this.show(id));
 
@@ -86,6 +87,4 @@ class MenuConnector {
     const result = await this.ctx.model.Menu.destroy({ where: { id } });
     return { result };
   }
-}
-
-module.exports = MenuConnector;
+};

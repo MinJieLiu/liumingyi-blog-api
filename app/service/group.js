@@ -1,16 +1,17 @@
+const egg = require('egg');
 const DataLoader = require('dataloader');
 
-const assembleCondition = require('../../util/assemble_condition');
+const assembleCondition = require('../util/assemble_condition');
 
-class TagConnector {
+module.exports = class extends egg.Service {
   constructor(ctx) {
-    this.ctx = ctx;
+    super(ctx);
 
     this.showLoader = new DataLoader(id => this.show(id));
   }
 
   async show(idArr) {
-    const list = await this.ctx.model.Tag.findAll({
+    const list = await this.ctx.model.Group.findAll({
       where: {
         id: idArr,
       },
@@ -37,7 +38,7 @@ class TagConnector {
       enable,
     } = query;
 
-    return this.ctx.model.Tag.findAndCountAll({
+    return this.ctx.model.Group.findAndCountAll({
       where: {
         ...assembleCondition({ name: { [Op.like]: `${name}%` } }, name),
         ...assembleCondition({ enable }, enable),
@@ -49,24 +50,22 @@ class TagConnector {
   }
 
   async create(body) {
-    const tag = await this.ctx.model.Tag.create(body);
-    return tag.get({ plain: true });
+    const group = await this.ctx.model.Group.create(body);
+    return group.get({ plain: true });
   }
 
   async update(body) {
-    const tag = await this.ctx.model.Tag.findById(body.id);
+    const group = await this.ctx.model.Group.findById(body.id);
     // 更新
-    if (!tag) {
+    if (!group) {
       throw new Error('未找到该条数据');
     }
-    const data = await tag.update(body);
+    const data = await group.update(body);
     return data.get({ plain: true });
   }
 
   async destroy(id) {
-    const result = await this.ctx.model.Tag.destroy({ where: { id } });
+    const result = await this.ctx.model.Group.destroy({ where: { id } });
     return { result };
   }
-}
-
-module.exports = TagConnector;
+};

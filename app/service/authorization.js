@@ -1,9 +1,10 @@
+const egg = require('egg');
 const DataLoader = require('dataloader');
 const crypto = require('crypto');
 
-class AuthorizationConnector {
+module.exports = class extends egg.Service {
   constructor(ctx) {
-    this.ctx = ctx;
+    super(ctx);
 
     this.showByUserLoader = new DataLoader(id => this.showByUserId(id));
   }
@@ -44,6 +45,4 @@ class AuthorizationConnector {
     this.ctx.logout();
     return { result: true };
   }
-}
-
-module.exports = AuthorizationConnector;
+};
