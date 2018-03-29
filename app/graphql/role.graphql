@@ -1,4 +1,4 @@
-type Role {
+type Role @auth(require: SYS_ROLE) {
   # Id
   id: Int!
   # 名称

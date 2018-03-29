@@ -1,4 +1,4 @@
-type Authorization {
+type Authorization @auth {
   # Id
   id: Int!
   # 提供者

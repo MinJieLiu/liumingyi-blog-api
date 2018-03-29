@@ -124,4 +124,27 @@ module.exports = class extends egg.Service {
     const result = await this.ctx.model.User.destroy({ where: { id } });
     return { result };
   }
+
+  /**
+   * 通过 Id 获取用户的菜单
+   * @param id
+   * @return {Promise<Array>}
+   */
+  async userMenus(id) {
+    const { User, Role, Menu } = this.ctx.model;
+    return Menu.findAll({
+      include: [{
+        model: Role,
+        attributes: [],
+        required: true,
+        include: [{
+          model: User,
+          attributes: [],
+          where: { id },
+          required: true,
+        }],
+      }],
+      raw: true,
+    });
+  }
 };

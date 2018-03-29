@@ -1,5 +1,20 @@
 scalar Date
 
+# 权限类型
+enum PermissionType {
+  SYS_USER
+  SYS_ROLE
+  SYS_MENU
+  SYS_LOG
+  SYS_SETTING
+
+  SYS_ADMIN
+}
+
+directive @auth(
+  require: PermissionType = SYS_ADMIN,
+) on OBJECT | FIELD_DEFINITION
+
 # 结果
 type Result {
   result: Boolean!

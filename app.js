@@ -21,12 +21,12 @@ module.exports = (app) => {
     }
 
     // 注册新用户
-    return ctx.connector.user.createWithProvider(user);
+    return ctx.service.user.createWithProvider(user);
   });
 
   // 序列化用户信息
   app.passport.serializeUser((ctx, user) => ({ id: user.id }));
 
   // 反序列化用户信息
-  app.passport.deserializeUser((ctx, user) => ctx.connector.user.find(user.id));
+  app.passport.deserializeUser((ctx, user) => ctx.service.user.find(user.id));
 };
