@@ -28,5 +28,12 @@ module.exports = (app) => {
   app.passport.serializeUser((ctx, user) => ({ id: user.id }));
 
   // 反序列化用户信息
-  app.passport.deserializeUser((ctx, user) => ctx.service.user.find(user.id));
+  app.passport.deserializeUser(async (ctx, { id }) => {
+    const [user, menus] = await Promise.all([
+      ctx.service.user.find(id),
+      ctx.service.menu.findByUserId(id),
+    ]);
+    user.menus = menus;
+    return user;
+  });
 };

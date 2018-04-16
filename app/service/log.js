@@ -10,6 +10,9 @@ module.exports = class extends egg.Service {
    * @return {Promise} - result
    */
   async findAndCountAll(query = {}) {
+    const {
+      Sequelize: { Op },
+    } = this.ctx.app;
     const { defaultPage, defaultSize } = this.config.pages;
     const {
       page = defaultPage,
@@ -18,8 +21,6 @@ module.exports = class extends egg.Service {
       method,
       url,
       ip,
-      createdAtStart,
-      createdAtEnd,
     } = query;
 
     const { offset, limit } = computePage(page, size);
@@ -28,17 +29,10 @@ module.exports = class extends egg.Service {
     return this.ctx.model.Log.findAndCountAll({
       where: Object.assign(
         {},
-        assembleCondition({ status: { $like: `${status}%` } }, status),
+        assembleCondition({ status: { [Op.like]: `${status}%` } }, status),
         assembleCondition({ method }, method),
-        assembleCondition({ url: { $like: `${url}%` } }, url),
-        assembleCondition({ ip: { $like: `${ip}%` } }, ip),
-        assembleCondition({
-          createdAt: Object.assign(
-            {},
-            assembleCondition({ $gte: new Date(createdAtStart) }, createdAtStart),
-            assembleCondition({ $lt: new Date(createdAtEnd) }, createdAtEnd),
-          ),
-        }, !!(createdAtStart || createdAtEnd)),
+        assembleCondition({ url: { [Op.like]: `${url}%` } }, url),
+        assembleCondition({ ip: { [Op.like]: `${ip}%` } }, ip),
       ),
       offset,
       limit,
