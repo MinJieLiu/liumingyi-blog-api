@@ -11,9 +11,8 @@ module.exports = class extends egg.Service {
     this.showLoader = new DataLoader(id => this.show(id));
   }
 
-
   async show(idArr) {
-    const list = await this.ctx.model.Post.findAll({
+    const list = await this.ctx.model.Article.findAll({
       where: {
         id: idArr,
       },
@@ -43,7 +42,7 @@ module.exports = class extends egg.Service {
       status,
     } = query;
 
-    return this.ctx.model.Post.findAndCountAll({
+    return this.ctx.model.Article.findAndCountAll({
       where: {
         ...assembleCondition({ title: { [Op.like]: `${title}%` } }, title),
         ...assembleCondition({ status }, status),
@@ -56,22 +55,22 @@ module.exports = class extends egg.Service {
   }
 
   async create(body) {
-    const post = await this.ctx.model.Post.create(body);
-    return post.get({ plain: true });
+    const article = await this.ctx.model.Article.create(body);
+    return article.get({ plain: true });
   }
 
   async update(body) {
-    const post = await this.ctx.model.Post.findById(body.id);
+    const article = await this.ctx.model.Article.findById(body.id);
     // 更新
-    if (!post) {
+    if (!article) {
       throw new Error('未找到该条数据');
     }
-    const data = await post.update(body);
+    const data = await article.update(body);
     return data.get({ plain: true });
   }
 
   async destroy(id) {
-    const result = await this.ctx.model.Post.destroy({ where: { id } });
+    const result = await this.ctx.model.Article.destroy({ where: { id } });
     return { result };
   }
 };

@@ -3,7 +3,7 @@ module.exports = (app) => {
   const { STRING, INTEGER, TEXT } = app.Sequelize;
   const Comment = model.define('comment', {
 
-    postId: {
+    articleId: {
       type: INTEGER,
       allowNull: false,
       comment: '文章 Id',
@@ -34,12 +34,12 @@ module.exports = (app) => {
     tableName: 'cms_comments',
     comment: '评论表',
     indexes: [
-      { fields: ['postId', 'parentId'] },
+      { fields: ['articleId', 'parentId'] },
     ],
   });
 
   Comment.associate = () => {
-    model.Comment.belongsTo(model.Post);
+    model.Comment.belongsTo(model.Article);
   };
 
   return Comment;

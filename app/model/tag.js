@@ -24,8 +24,8 @@ module.exports = (app) => {
   });
 
   Tag.associate = () => {
-    model.Tag.belongsToMany(model.Post, {
-      through: 'cms_post_tags',
+    model.Tag.belongsToMany(model.Article, {
+      through: 'cms_article_tags',
     });
   };
 

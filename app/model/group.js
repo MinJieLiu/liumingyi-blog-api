@@ -41,7 +41,7 @@ module.exports = (app) => {
   });
 
   Group.associate = () => {
-    model.Group.hasMany(model.Post);
+    model.Group.hasMany(model.Article);
   };
 
   return Group;

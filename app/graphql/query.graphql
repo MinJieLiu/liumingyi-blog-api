@@ -39,9 +39,9 @@ type Query {
   tagList(input: TagQueryInput): TagResult!
 
   # 文章
-  post(id: Int!): Post!
+  article(id: Int!): Article!
   # 文章列表
-  postList(input: PostQueryInput): PostResult!
+  articleList(input: ArticleQueryInput): ArticleResult!
 
   # 评论
   comment(id: Int!): Comment!

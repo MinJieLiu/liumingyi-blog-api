@@ -5,7 +5,7 @@ module.exports = (app) => {
     INTEGER,
     TEXT,
   } = app.Sequelize;
-  const Post = model.define('post', {
+  const Article = model.define('article', {
 
     name: {
       type: STRING(200),
@@ -67,22 +67,22 @@ module.exports = (app) => {
     },
 
   }, {
-    tableName: 'cms_posts',
+    tableName: 'cms_articles',
     comment: '文章表',
     indexes: [
       { fields: ['name', 'title', 'type'] },
     ],
   });
 
-  Post.associate = () => {
-    model.Post.hasMany(model.Comment);
+  Article.associate = () => {
+    model.Article.hasMany(model.Comment);
 
-    model.Post.belongsTo(model.Group);
+    model.Article.belongsTo(model.Group);
 
-    model.Post.belongsToMany(model.Tag, {
-      through: 'cms_post_tags',
+    model.Article.belongsToMany(model.Tag, {
+      through: 'cms_article_tags',
     });
   };
 
-  return Post;
+  return Article;
 };

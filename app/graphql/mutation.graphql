@@ -43,11 +43,11 @@ type Mutation {
   deleteTag(id: Int!): Result!
 
   # 创建文章
-  createPost(input: PostCreateInput!): Post
+  createArticle(input: ArticleCreateInput!): Article
   # 更新文章
-  updatePost(input: PostUpdateInput!): Post
+  updateArticle(input: ArticleUpdateInput!): Article
   # 删除文章
-  deletePost(id: Int!): Result!
+  deleteArticle(id: Int!): Result!
 
   # 创建评论
   createComment(input: CommentCreateInput!): Comment

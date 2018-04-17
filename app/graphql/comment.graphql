@@ -2,7 +2,7 @@ type Comment {
   # Id
   id: Int!
   # 文章 Id
-  postId: Int!
+  articleId: Int!
   # 用户 Id
   userId: Int
   # 上级 Id
@@ -25,14 +25,14 @@ input CommentQueryInput {
   # 用户 Id
   userId: Int
   # 文章 Id
-  postId: Int
+  articleId: Int
   # 状态
   status: String
 }
 
 input CommentCreateInput {
   # 文章 Id
-  postId: Int!
+  articleId: Int!
   # 上级 Id
   parentId: Int
   # 内容

@@ -1,4 +1,4 @@
-type Post {
+type Article {
   # Id
   id: Int!
   # 名称
@@ -29,7 +29,7 @@ type Post {
   updatedAt: Date
 }
 
-input PostQueryInput {
+input ArticleQueryInput {
   # 页数
   page: Int
   # 每页条数
@@ -46,7 +46,7 @@ input PostQueryInput {
   status: String
 }
 
-input PostCreateInput {
+input ArticleCreateInput {
   # 名称
   name: String
   # 标题
@@ -69,7 +69,7 @@ input PostCreateInput {
   sort: Int!
 }
 
-input PostUpdateInput {
+input ArticleUpdateInput {
   # Id
   id: Int!
   # 名称
@@ -94,9 +94,9 @@ input PostUpdateInput {
   sort: Int
 }
 
-type PostResult {
+type ArticleResult {
   # 总数
   count: Int!
   # 列表
-  rows: [Post]!
+  rows: [Article]!
 }
