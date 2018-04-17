@@ -85,24 +85,26 @@ module.exports = class extends egg.Service {
   }
 
   async update(body) {
-    const { menuIds } = body;
-    const { Role, Menu } = this.ctx.model;
-    let role = await Role.findById(body.id);
-    if (!role) {
-      throw new Error('未找到该条数据');
-    }
-    // 更新
-    role = await role.update(body);
-    const data = role.get({ plain: true });
-    // 更新关系
-    if (menuIds) {
-      const menus = await Menu.findAll({
-        where: { id: menuIds },
-      });
-      await role.setMenus(menus);
-      data.menus = menus;
-    }
-    return data;
+    return this.ctx.model.transaction(async (transaction) => {
+      const { menuIds } = body;
+      const { Role, Menu } = this.ctx.model;
+      let role = await Role.findById(body.id);
+      if (!role) {
+        throw new Error('未找到该条数据');
+      }
+      // 更新
+      role = await role.update(body, { transaction });
+      const data = role.get({ plain: true });
+      // 更新关系
+      if (menuIds) {
+        const menus = await Menu.findAll({
+          where: { id: menuIds },
+        });
+        await role.setMenus(menus, { transaction });
+        data.menus = menus;
+      }
+      return data;
+    });
   }
 
   async destroy(id) {

@@ -93,31 +93,33 @@ module.exports = class extends egg.Service {
   }
 
   async update(body) {
-    const { id, roleIds } = body;
-    const { User, Role } = this.ctx.model;
-    let user = await User.findById(id);
-    if (!user) {
-      throw new Error('未找到该条数据');
-    }
-    // 有密码则加密修改
-    const { password } = body;
-    if (password) {
-      Object.assign(body, {
-        password: crypto.createHash('md5').update(password).digest('hex'),
-      });
-    }
-    // 更新
-    user = await user.update(body);
-    const data = user.get({ plain: true });
-    // 更新关系
-    if (roleIds) {
-      const roles = await Role.findAll({
-        where: { id: roleIds },
-      });
-      await user.setRoles(roles);
-      data.roles = roles;
-    }
-    return data;
+    return this.ctx.model.transaction(async (transaction) => {
+      const { id, roleIds } = body;
+      const { User, Role } = this.ctx.model;
+      let user = await User.findById(id);
+      if (!user) {
+        throw new Error('未找到该条数据');
+      }
+      // 有密码则加密修改
+      const { password } = body;
+      if (password) {
+        Object.assign(body, {
+          password: crypto.createHash('md5').update(password).digest('hex'),
+        });
+      }
+      // 更新
+      user = await user.update(body, { transaction });
+      const data = user.get({ plain: true });
+      // 更新关系
+      if (roleIds) {
+        const roles = await Role.findAll({
+          where: { id: roleIds },
+        });
+        await user.setRoles(roles, { transaction });
+        data.roles = roles;
+      }
+      return data;
+    });
   }
 
   async destroy(id) {
