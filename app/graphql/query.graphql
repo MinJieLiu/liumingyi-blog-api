@@ -5,25 +5,28 @@ type Query {
   # 登出
   logout: Result!
 
+  # 个人信息
+  profile: User!
+
   # 用户
-  user(id: Int): User!
+  user(id: Int!): User! @auth(require: SYS_USER)
   # 用户列表
-  userList(input: UserQueryInput): UserResult!
+  userList(input: UserQueryInput): UserResult! @auth(require: SYS_USER)
 
   # 角色
-  role(id: Int!): Role!
+  role(id: Int!): Role! @auth(require: SYS_ROLE)
   # 角色列表
-  roleList(name: String): RoleResult!
+  roleList(name: String): RoleResult! @auth(require: SYS_ROLE)
 
   # 菜单
-  menu(id: Int!): Menu!
+  menu(id: Int!): Menu! @auth(require: SYS_MENU)
   # 角色列表
-  menuList(name: String): MenuResult!
+  menuList(name: String): MenuResult! @auth(require: SYS_MENU)
 
   # 设置
-  setting(id: Int!): Setting!
+  setting(id: Int!): Setting! @auth(require: SYS_SETTING)
   # 设置列表
-  settingList(input: SettingQueryInput): SettingResult!
+  settingList(input: SettingQueryInput): SettingResult! @auth(require: SYS_SETTING)
 
   # 分组
   group(id: Int!): Group!

@@ -1,18 +1,18 @@
 scalar Date
 
 # 权限类型
-enum PermissionType {
+enum PermissionEnum {
   SYS_USER
   SYS_ROLE
   SYS_MENU
   SYS_LOG
   SYS_SETTING
 
-  SYS_ADMIN
+  SYS_INDEX
 }
 
 directive @auth(
-  require: PermissionType = SYS_ADMIN,
+  require: PermissionEnum = SYS_INDEX,
 ) on OBJECT | FIELD_DEFINITION
 
 # 结果

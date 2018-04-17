@@ -1,4 +1,4 @@
-type User @auth(require: SYS_USER) {
+type User {
   # Id
   id: Int!
   # 用户名

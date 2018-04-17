@@ -1,4 +1,4 @@
-type Setting @auth(require: SYS_SETTING) {
+type Setting {
   # Id
   id: Int!
   # 上级 Id

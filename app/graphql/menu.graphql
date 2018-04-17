@@ -1,4 +1,4 @@
-type Menu @auth(require: SYS_MENU) {
+type Menu {
   # Id
   id: Int!
   # 上级 Id
