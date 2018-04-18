@@ -5,8 +5,12 @@ type Comment {
   articleId: Int!
   # 用户 Id
   userId: Int
+  # 用户
+  user: User
   # 上级 Id
   parentId: Int!
+  # 上级
+  parent: Comment
   # 内容
   content: String!
   # 状态

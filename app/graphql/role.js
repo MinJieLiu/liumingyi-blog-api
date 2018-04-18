@@ -1,9 +1,4 @@
 exports.resolver = {
-  User: {
-    roles(obj, args, ctx) {
-      return ctx.service.role.findByUserId(obj.id);
-    },
-  },
   Query: {
     role(obj, args, ctx) {
       return ctx.service.role.find(args.id);

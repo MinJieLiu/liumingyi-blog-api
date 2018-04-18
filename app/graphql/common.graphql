@@ -15,6 +15,14 @@ directive @auth(
   require: PermissionEnum = SYS_INDEX,
 ) on OBJECT | FIELD_DEFINITION
 
+# 分页参数
+input PageInput {
+  # 页数
+  page: Int
+  # 每页条数
+  size: Int
+}
+
 # 结果
 type Result {
   result: Boolean!

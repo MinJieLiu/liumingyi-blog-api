@@ -1,4 +1,12 @@
 exports.resolver = {
+  Comment: {
+    user(obj, args, ctx) {
+      return ctx.service.user.find(obj.userId);
+    },
+    parent(obj, args, ctx) {
+      return ctx.service.comment.find(obj.parentId);
+    },
+  },
   Query: {
     comment(obj, args, ctx) {
       return ctx.service.comment.find(args.id);

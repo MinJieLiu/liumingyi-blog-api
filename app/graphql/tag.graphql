@@ -5,6 +5,8 @@ type Tag {
   name: String!
   # 排序
   sort: Int!
+  # 文章列表
+  articles(input: PageInput): ArticleResult!
   # 创建日期
   createdAt: Date
   # 更新日期

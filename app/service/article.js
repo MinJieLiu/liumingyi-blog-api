@@ -54,6 +54,32 @@ module.exports = class extends egg.Service {
     });
   }
 
+  async findByTag(query) {
+    const {
+      config: { pages: { defaultPage, defaultSize } },
+    } = this.ctx.app;
+    const {
+      id,
+      page = defaultPage,
+      size = defaultSize,
+    } = query;
+    const { Tag, Article } = this.ctx.model;
+
+    return Article.findAndCountAll({
+      include: [{
+        model: Tag,
+        attributes: ['id'],
+        where: { id },
+        required: true,
+      }],
+      order: [
+        ['sort', 'DESC'],
+      ],
+      ...computePage(page, size),
+      raw: true,
+    });
+  }
+
   async create(body) {
     const article = await this.ctx.model.Article.create(body);
     return article.get({ plain: true });

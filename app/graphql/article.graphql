@@ -7,8 +7,12 @@ type Article {
   title: String!
   # 用户 Id
   userId: Int
+  # 用户
+  user: User
   # 分组 Id
-  groupId: Int
+  groupId: Int!
+  # 分组
+  group: Group!
   # 类型
   type: String!
   # 缩略图
@@ -21,6 +25,10 @@ type Article {
   status: String!
   # 评论状态
   commentStatus: String!
+  # 评论列表
+  comments: [Comment]!
+  # 标签列表
+  tags: [Tag]!
   # 排序
   sort: Int!
   # 创建日期
@@ -52,7 +60,7 @@ input ArticleCreateInput {
   # 标题
   title: String!
   # 分组 Id
-  groupId: Int
+  groupId: Int!
   # 类型
   type: String!
   # 缩略图

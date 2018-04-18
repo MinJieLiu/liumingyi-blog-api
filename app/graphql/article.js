@@ -1,4 +1,18 @@
 exports.resolver = {
+  Article: {
+    user(obj, args, ctx) {
+      return ctx.service.user.find(obj.userId);
+    },
+    group(obj, args, ctx) {
+      return ctx.service.group.find(obj.groupId);
+    },
+    comments(obj, args, ctx) {
+      return ctx.service.comment.findByArticleId(obj.id);
+    },
+    tags(obj, args, ctx) {
+      return ctx.service.tag.findByArticleId(obj.id);
+    },
+  },
   Query: {
     article(obj, args, ctx) {
       return ctx.service.article.find(args.id);

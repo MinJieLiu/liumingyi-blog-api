@@ -1,4 +1,9 @@
 exports.resolver = {
+  Group: {
+    parent(obj, args, ctx) {
+      return ctx.service.group.find(obj.parentId);
+    },
+  },
   Query: {
     group(obj, args, ctx) {
       return ctx.service.group.find(args.id);

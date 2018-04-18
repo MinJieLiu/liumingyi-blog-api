@@ -1,4 +1,9 @@
 exports.resolver = {
+  User: {
+    roles(obj, args, ctx) {
+      return ctx.service.role.findByUserId(obj.id);
+    },
+  },
   Query: {
     profile(obj, args, ctx) {
       if (!ctx.user) {

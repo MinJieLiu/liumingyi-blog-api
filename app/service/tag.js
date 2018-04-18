@@ -8,6 +8,8 @@ module.exports = class extends egg.Service {
     super(ctx);
 
     this.showLoader = new DataLoader(id => this.show(id));
+
+    this.showByArticleLoader = new DataLoader(id => this.showByArticleId(id));
   }
 
   async show(idArr) {
@@ -18,6 +20,23 @@ module.exports = class extends egg.Service {
       raw: true,
     });
     return idArr.map(currentId => list.find(n => n.id === currentId));
+  }
+
+  async showByArticleId(articleIdArr) {
+    const { Article, Tag } = this.ctx.model;
+    const list = await Tag.findAll({
+      include: [{
+        model: Article,
+        attributes: ['id'],
+        where: { id: articleIdArr },
+        required: true,
+      }],
+      order: [
+        ['sort', 'DESC'],
+      ],
+      raw: true,
+    });
+    return articleIdArr.map(currentId => list.filter(n => n['articles.id'] === currentId));
   }
 
   find(id) {
@@ -47,6 +66,10 @@ module.exports = class extends egg.Service {
         ['sort', 'DESC'],
       ],
     });
+  }
+
+  findByArticleId(articleId) {
+    return this.showByArticleLoader.load(articleId);
   }
 
   async create(body) {
