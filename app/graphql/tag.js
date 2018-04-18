@@ -1,9 +1,4 @@
 exports.resolver = {
-  Tag: {
-    articles({ id }, { input }, ctx) {
-      return ctx.service.article.findByTag({ id, ...input });
-    },
-  },
   Query: {
     tag(obj, args, ctx) {
       return ctx.service.tag.find(args.id);

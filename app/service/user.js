@@ -42,14 +42,24 @@ module.exports = class extends egg.Service {
       email,
       enable,
       mobile,
+      roleIds = [],
     } = query;
 
-    return this.ctx.model.User.findAndCountAll({
+    const { User, Role } = this.ctx.model;
+    return User.findAndCountAll({
       where: {
         ...assembleCondition({ email: { [Op.like]: `${email}%` } }, email),
         ...assembleCondition({ enable }, enable),
         ...assembleCondition({ mobile: { [Op.like]: `${mobile}%` } }, mobile),
       },
+      ...roleIds.length ? {
+        include: [{
+          model: Role,
+          attributes: [],
+          where: { id: roleIds },
+          required: true,
+        }],
+      } : undefined,
       ...computePage(page, size),
       order: [
         ['updatedAt', 'DESC'],

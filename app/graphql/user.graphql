@@ -40,6 +40,8 @@ input UserQueryInput {
   mobile: String
   # 启用状态
   enable: Boolean
+  # 角色 Id 列表
+  roleIds: [Int]
 }
 
 input UserCreateInput {

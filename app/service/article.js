@@ -39,14 +39,30 @@ module.exports = class extends egg.Service {
       page = defaultPage,
       size = defaultSize,
       title,
+      userId,
+      groupId,
+      type,
       status,
+      tagIds = [],
     } = query;
 
-    return this.ctx.model.Article.findAndCountAll({
+    const { Tag, Article } = this.ctx.model;
+    return Article.findAndCountAll({
       where: {
         ...assembleCondition({ title: { [Op.like]: `${title}%` } }, title),
+        ...assembleCondition({ userId }, userId),
+        ...assembleCondition({ groupId }, groupId),
+        ...assembleCondition({ type }, type),
         ...assembleCondition({ status }, status),
       },
+      ...tagIds.length ? {
+        include: [{
+          model: Tag,
+          attributes: [],
+          where: { id: tagIds },
+          required: true,
+        }],
+      } : undefined,
       ...computePage(page, size),
       order: [
         ['sort', 'DESC'],
@@ -54,45 +70,42 @@ module.exports = class extends egg.Service {
     });
   }
 
-  async findByTag(query) {
-    const {
-      config: { pages: { defaultPage, defaultSize } },
-    } = this.ctx.app;
-    const {
-      id,
-      page = defaultPage,
-      size = defaultSize,
-    } = query;
-    const { Tag, Article } = this.ctx.model;
-
-    return Article.findAndCountAll({
-      include: [{
-        model: Tag,
-        attributes: ['id'],
-        where: { id },
-        required: true,
-      }],
-      order: [
-        ['sort', 'DESC'],
-      ],
-      ...computePage(page, size),
-      raw: true,
-    });
-  }
-
-  async create(body) {
-    const article = await this.ctx.model.Article.create(body);
-    return article.get({ plain: true });
-  }
-
-  async update(body) {
-    const article = await this.ctx.model.Article.findById(body.id);
-    // 更新
-    if (!article) {
-      throw new Error('未找到该条数据');
+  async create({ tagIds, ...body }) {
+    const { Article, Tag } = this.ctx.model;
+    const article = await Article.create(body);
+    // 建立关系
+    const data = article.get({ plain: true });
+    if (tagIds) {
+      const tags = await Tag.findAll({
+        where: { id: tagIds },
+      });
+      await article.setTags(tags);
+      data.tags = tags;
     }
-    const data = await article.update(body);
-    return data.get({ plain: true });
+    return data;
+  }
+
+  async update({ tagIds, ...body }) {
+    return this.ctx.model.transaction(async (transaction) => {
+      const { Article, Tag } = this.ctx.model;
+      let article = await Article.findById(body.id);
+      // 更新
+      if (!article) {
+        throw new Error('未找到该条数据');
+      }
+      // 更新
+      article = await article.update(body, { transaction });
+      const data = article.get({ plain: true });
+      // 更新关系
+      if (tagIds) {
+        const tags = await Tag.findAll({
+          where: { id: tagIds },
+        });
+        await article.setTags(tags, { transaction });
+        data.tags = tags;
+      }
+      return data;
+    });
   }
 
   async destroy(id) {

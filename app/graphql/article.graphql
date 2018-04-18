@@ -29,7 +29,7 @@ type Article {
   comments: [Comment]!
   # 标签列表
   tags: [Tag]!
-  # 排序
+  # 排序/权重
   sort: Int!
   # 创建日期
   createdAt: Date
@@ -48,6 +48,8 @@ input ArticleQueryInput {
   userId: Int
   # 分组 Id
   groupId: Int
+  # 标签 Id
+  tagIds: [Int]
   # 类型
   type: String
   # 状态
@@ -61,6 +63,8 @@ input ArticleCreateInput {
   title: String!
   # 分组 Id
   groupId: Int!
+  # 标签 Id
+  tagIds: [Int]
   # 类型
   type: String!
   # 缩略图
@@ -73,7 +77,7 @@ input ArticleCreateInput {
   status: String
   # 评论状态
   commentStatus: String
-  # 排序
+  # 排序/权重
   sort: Int!
 }
 
@@ -86,6 +90,8 @@ input ArticleUpdateInput {
   title: String
   # 分组 Id
   groupId: Int
+  # 标签 Id
+  tagIds: [Int]
   # 类型
   type: String
   # 缩略图
@@ -98,7 +104,7 @@ input ArticleUpdateInput {
   status: String
   # 评论状态
   commentStatus: String
-  # 排序
+  # 排序/权重
   sort: Int
 }
 

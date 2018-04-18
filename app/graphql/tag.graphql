@@ -3,10 +3,8 @@ type Tag {
   id: Int!
   # 名称
   name: String!
-  # 排序
+  # 排序/权重
   sort: Int!
-  # 文章列表
-  articles(input: PageInput): ArticleResult!
   # 创建日期
   createdAt: Date
   # 更新日期
@@ -25,7 +23,7 @@ input TagQueryInput {
 input TagCreateInput {
   # 名称
   name: String!
-  # 排序
+  # 排序/权重
   sort: Int!
 }
 
@@ -34,7 +32,7 @@ input TagUpdateInput {
   id: Int!
   # 名称
   name: String
-  # 排序
+  # 排序/权重
   sort: Int
 }
 
