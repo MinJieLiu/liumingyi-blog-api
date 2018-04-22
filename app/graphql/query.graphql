@@ -3,10 +3,10 @@ type Query {
   # 登录
   login(username: String! password: String!): User!
   # 登出
-  logout: Result!
+  logout: Result! @auth
 
   # 个人信息
-  profile: User!
+  profile: User! @auth
 
   # 用户
   user(id: Int!): User! @auth(require: SYS_USER)

@@ -6,9 +6,6 @@ exports.resolver = {
   },
   Query: {
     profile(obj, args, ctx) {
-      if (!ctx.user) {
-        throw new Error('not authorized');
-      }
       return ctx.service.user.find(ctx.user.id);
     },
     user(obj, args, ctx) {

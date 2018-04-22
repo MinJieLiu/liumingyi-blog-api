@@ -1,65 +1,65 @@
 type Mutation {
 
   # 创建用户
-  createUser(input: UserCreateInput!): User
+  createUser(input: UserCreateInput!): User @auth(require: SYS_USER_EDIT)
   # 更新用户
-  updateUser(input: UserUpdateInput!): User
+  updateUser(input: UserUpdateInput!): User @auth(require: SYS_USER_EDIT)
   # 删除用户
-  deleteUser(id: Int!): Result!
+  deleteUser(id: Int!): Result! @auth(require: SYS_USER_DELETE)
 
   # 创建角色
-  createRole(input: RoleCreateInput!): Role
+  createRole(input: RoleCreateInput!): Role @auth(require: SYS_ROLE_EDIT)
   # 更新角色
-  updateRole(input: RoleUpdateInput!): Role
+  updateRole(input: RoleUpdateInput!): Role @auth(require: SYS_ROLE_EDIT)
   # 删除角色
-  deleteRole(id: Int!): Result!
+  deleteRole(id: Int!): Result! @auth(require: SYS_ROLE_DELETE)
 
   # 创建菜单
-  createMenu(input: MenuCreateInput!): Menu
+  createMenu(input: MenuCreateInput!): Menu @auth(require: SYS_MENU_EDIT)
   # 更新菜单
-  updateMenu(input: MenuUpdateInput!): Menu
+  updateMenu(input: MenuUpdateInput!): Menu @auth(require: SYS_MENU_EDIT)
   # 删除菜单
-  deleteMenu(id: Int!): Result!
+  deleteMenu(id: Int!): Result! @auth(require: SYS_MENU_DELETE)
 
   # 创建设置
-  createSetting(input: SettingCreateInput!): Setting
+  createSetting(input: SettingCreateInput!): Setting @auth(require: SYS_SETTING_EDIT)
   # 更新设置
-  updateSetting(input: SettingUpdateInput!): Setting
+  updateSetting(input: SettingUpdateInput!): Setting @auth(require: SYS_SETTING_EDIT)
   # 删除设置
-  deleteSetting(id: Int!): Result!
+  deleteSetting(id: Int!): Result! @auth(require: SYS_SETTING_DELETE)
 
   # 创建分组
-  createGroup(input: GroupCreateInput!): Group
+  createGroup(input: GroupCreateInput!): Group @auth(require: CMS_GROUP_EDIT)
   # 更新分组
-  updateGroup(input: GroupUpdateInput!): Group
+  updateGroup(input: GroupUpdateInput!): Group @auth(require: CMS_GROUP_EDIT)
   # 删除分组
-  deleteGroup(id: Int!): Result!
+  deleteGroup(id: Int!): Result! @auth(require: CMS_GROUP_DELETE)
 
   # 创建标签
-  createTag(input: TagCreateInput!): Tag
+  createTag(input: TagCreateInput!): Tag @auth(require: CMS_TAG_EDIT)
   # 更新标签
-  updateTag(input: TagUpdateInput!): Tag
+  updateTag(input: TagUpdateInput!): Tag @auth(require: CMS_TAG_EDIT)
   # 删除标签
-  deleteTag(id: Int!): Result!
+  deleteTag(id: Int!): Result! @auth(require: CMS_TAG_DELETE)
 
   # 创建文章
-  createArticle(input: ArticleCreateInput!): Article
+  createArticle(input: ArticleCreateInput!): Article @auth(require: CMS_ARTICLE_EDIT)
   # 更新文章
-  updateArticle(input: ArticleUpdateInput!): Article
+  updateArticle(input: ArticleUpdateInput!): Article @auth(require: CMS_ARTICLE_EDIT)
   # 删除文章
-  deleteArticle(id: Int!): Result!
+  deleteArticle(id: Int!): Result! @auth(require: CMS_ARTICLE_DELETE)
 
   # 创建评论
-  createComment(input: CommentCreateInput!): Comment
+  createComment(input: CommentCreateInput!): Comment @auth(require: CMS_COMMENT_EDIT)
   # 更新评论
-  updateComment(input: CommentUpdateInput!): Comment
+  updateComment(input: CommentUpdateInput!): Comment @auth(require: CMS_COMMENT_EDIT)
   # 删除评论
-  deleteComment(id: Int!): Result!
+  deleteComment(id: Int!): Result! @auth(require: CMS_COMMENT_DELETE)
 
   # 创建链接
-  createLink(input: LinkCreateInput!): Link
+  createLink(input: LinkCreateInput!): Link @auth(require: CMS_LINK_EDIT)
   # 更新链接
-  updateLink(input: LinkUpdateInput!): Link
+  updateLink(input: LinkUpdateInput!): Link @auth(require: CMS_LINK_EDIT)
   # 删除链接
-  deleteLink(id: Int!): Result!
+  deleteLink(id: Int!): Result! @auth(require: CMS_LINK_DELETE)
 }
