@@ -28,18 +28,28 @@ module.exports = class AuthDirective extends SchemaDirectiveVisitor {
       const field = fields[fieldName];
       const { resolve = defaultFieldResolver } = field;
       field.resolve = async (...args) => {
-        const ctx = args[2];
+        // context
+        const { user } = args[2];
         // 如果该字段不需要角色，则返回 objectType：
         const requiredRole = field[SYMBOL_AUTH_PERMISSION] || objectType[SYMBOL_AUTH_PERMISSION];
 
         if (!requiredRole) {
           return resolve(...args);
         }
-        const menus = (ctx.user && ctx.user.menus) || [];
+        // 未登录
+        if (!user) {
+          throw new Error('Not logged in');
+        }
+        // 超级管理员
+        if (user.id === 1) {
+          return resolve(...args);
+        }
+        // 当前的菜单
+        const { menus = [] } = user;
 
-        // 检查当前权限
+        // 检查权限
         if (!menus.some(n => n.permission === requiredRole)) {
-          throw new Error('not authorized');
+          throw new Error('Not authorized');
         }
 
         return resolve(...args);
