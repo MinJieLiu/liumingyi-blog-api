@@ -75,7 +75,10 @@ module.exports = class extends egg.Service {
   }
 
   async create(body) {
-    const comment = await this.ctx.model.Comment.create(body);
+    const comment = await this.ctx.model.Comment.create({
+      ...body,
+      userId: this.ctx.user.id,
+    });
     return comment.get({ plain: true });
   }
 

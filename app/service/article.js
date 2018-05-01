@@ -72,7 +72,10 @@ module.exports = class extends egg.Service {
 
   async create({ tagIds, ...body }) {
     const { Article, Tag } = this.ctx.model;
-    const article = await Article.create(body);
+    const article = await Article.create({
+      ...body,
+      userId: this.ctx.user.id,
+    });
     // 建立关系
     const data = article.get({ plain: true });
     if (tagIds) {

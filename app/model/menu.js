@@ -17,7 +17,7 @@ module.exports = (app) => {
     },
 
     type: {
-      type: INTEGER,
+      type: STRING(20),
       defaultValue: 1,
       comment: '类型',
     },
