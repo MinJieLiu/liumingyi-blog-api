@@ -3,6 +3,9 @@ exports.resolver = {
     roles(obj, args, ctx) {
       return ctx.service.role.findByUserId(obj.id);
     },
+    menus(obj, args, ctx) {
+      return ctx.service.menu.findByUserId(obj.id);
+    },
   },
   Query: {
     profile(obj, args, ctx) {

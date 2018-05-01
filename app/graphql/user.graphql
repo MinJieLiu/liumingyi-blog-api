@@ -19,6 +19,8 @@ type User {
   introduction: String
   # 角色列表
   roles: [Role]!
+  # 菜单列表
+  menus: [Menu]!
   # 授权列表
   authorizations: [Authorization]!
   # 创建日期
