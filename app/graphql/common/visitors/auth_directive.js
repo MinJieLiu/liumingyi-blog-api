@@ -29,7 +29,7 @@ module.exports = class AuthDirective extends SchemaDirectiveVisitor {
       const { resolve = defaultFieldResolver } = field;
       field.resolve = async (...args) => {
         // context
-        const { user } = args[2];
+        const ctx = args[2];
         // 如果该字段不需要角色，则返回 objectType：
         const requiredRole = field[SYMBOL_AUTH_PERMISSION] || objectType[SYMBOL_AUTH_PERMISSION];
 
@@ -37,18 +37,20 @@ module.exports = class AuthDirective extends SchemaDirectiveVisitor {
           return resolve(...args);
         }
         // 未登录
-        if (!user) {
+        if (!ctx.user) {
+          ctx.status = 401;
           throw new Error('Not logged in');
         }
         // 超级管理员
-        if (user.id === 1) {
+        if (ctx.user.id === 1) {
           return resolve(...args);
         }
         // 当前的菜单
-        const { menus = [] } = user;
+        const { menus = [] } = ctx.user;
 
         // 检查权限
         if (!menus.some(n => n.permission === requiredRole)) {
+          ctx.status = 403;
           throw new Error('Not authorized');
         }
 
