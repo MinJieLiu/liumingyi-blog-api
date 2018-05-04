@@ -1,10 +1,5 @@
 type Query {
 
-  # 登录
-  login(username: String! password: String!): User!
-  # 登出
-  logout: Result! @auth
-
   # 个人信息
   profile: User! @auth
 

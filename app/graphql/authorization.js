@@ -4,7 +4,7 @@ exports.resolver = {
       return ctx.service.authorization.findByUserId(obj.id);
     },
   },
-  Query: {
+  Mutation: {
     login(obj, args, ctx) {
       return ctx.service.authorization.login(args);
     },

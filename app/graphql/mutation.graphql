@@ -1,5 +1,10 @@
 type Mutation {
 
+  # 登录
+  login(username: String! password: String!): User!
+  # 登出
+  logout: Result! @auth
+
   # 创建用户
   createUser(input: UserCreateInput!): User @auth(require: SYS_USER_EDIT)
   # 更新用户
