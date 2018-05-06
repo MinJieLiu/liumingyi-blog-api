@@ -8,9 +8,9 @@ type User {
   # 手机
   mobile: String
   # 启用状态
-  enable: Boolean!
+  enable: Int!
   # 激活状态
-  isActive: Boolean!
+  isActive: Int!
   # 昵称
   nickname: String
   # 头像
@@ -41,9 +41,11 @@ input UserQueryInput {
   # 手机
   mobile: String
   # 启用状态
-  enable: Boolean
+  enable: Int
   # 角色 Id 列表
   roleIds: [Int]
+  # 排序
+  order: [String]
 }
 
 input UserCreateInput {
@@ -56,9 +58,9 @@ input UserCreateInput {
   # 密码
   password: String!
   # 启用状态
-  enable: Boolean
+  enable: Int
   # 激活状态
-  isActive: Boolean
+  isActive: Int
   # 昵称
   nickname: String
   # 头像
@@ -81,9 +83,9 @@ input UserUpdateInput {
   # 密码
   password: String
   # 启用状态
-  enable: Boolean
+  enable: Int
   # 激活状态
-  isActive: Boolean
+  isActive: Int
   # 昵称
   nickname: String
   # 头像

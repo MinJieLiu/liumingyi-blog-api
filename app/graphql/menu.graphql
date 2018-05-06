@@ -8,7 +8,7 @@ type Menu {
   # 类型
   type: String!
   # 启用
-  enable: Boolean!
+  enable: Int!
   # 标识
   permission: String!
   # 图标
@@ -31,7 +31,7 @@ input MenuCreateInput {
   # 类型
   type: String!
   # 启用
-  enable: Boolean!
+  enable: Int!
   # 标识
   permission: String!
   # 图标
@@ -52,7 +52,7 @@ input MenuUpdateInput {
   # 类型
   type: String
   # 启用
-  enable: Boolean
+  enable: Int
   # 标识
   permission: String
   # 图标

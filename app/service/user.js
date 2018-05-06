@@ -39,15 +39,18 @@ module.exports = class extends egg.Service {
     const {
       page = defaultPage,
       size = defaultSize,
+      username,
       email,
       enable,
       mobile,
       roleIds = [],
+      order,
     } = query;
 
     const { User, Role } = this.ctx.model;
     return User.findAndCountAll({
       where: {
+        ...assembleCondition({ username: { [Op.like]: `${username}%` } }, username),
         ...assembleCondition({ email: { [Op.like]: `${email}%` } }, email),
         ...assembleCondition({ enable }, enable),
         ...assembleCondition({ mobile: { [Op.like]: `${mobile}%` } }, mobile),
@@ -61,9 +64,7 @@ module.exports = class extends egg.Service {
         }],
       } : undefined,
       ...computePage(page, size),
-      order: [
-        ['updatedAt', 'DESC'],
-      ],
+      ...assembleCondition({ order: [order] }, order),
     });
   }
 

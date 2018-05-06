@@ -8,7 +8,7 @@ type Group {
   # 名称
   name: String!
   # 启用状态
-  enable: Boolean!
+  enable: Int!
   # 排序
   sort: Int!
   # 描述
@@ -23,7 +23,7 @@ input GroupQueryInput {
   # 名称
   name: String
   # 启用状态
-  enable: Boolean
+  enable: Int
 }
 
 input GroupCreateInput {
@@ -32,7 +32,7 @@ input GroupCreateInput {
   # 名称
   name: String!
   # 启用状态
-  enable: Boolean!
+  enable: Int!
   # 排序
   sort: Int!
   # 描述
@@ -47,7 +47,7 @@ input GroupUpdateInput {
   # 名称
   name: String
   # 启用状态
-  enable: Boolean
+  enable: Int
   # 排序
   sort: Int
   # 描述
