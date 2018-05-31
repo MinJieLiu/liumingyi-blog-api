@@ -76,8 +76,8 @@ module.exports = class extends egg.Service {
       ...body,
       userId: this.ctx.user.id,
     });
-    // 建立关系
     const data = article.get({ plain: true });
+    // 建立关系
     if (tagIds) {
       const tags = await Tag.findAll({
         where: { id: tagIds },

@@ -76,8 +76,8 @@ module.exports = class extends egg.Service {
     });
     const { User, Role } = this.ctx.model;
     const user = await User.create(body);
-    // 建立关系
     const data = user.get({ plain: true });
+    // 建立关系
     if (roleIds) {
       const roles = await Role.findAll({
         where: { id: roleIds },
